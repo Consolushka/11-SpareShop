@@ -1,0 +1,11 @@
+.container{
+  padding: 0 16px;
+
+  &--left{
+    padding-right: 0;
+  }
+
+  &--full{
+    padding: 0;
+  }
+}

@@ -1,0 +1,32 @@
+.btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.btn--icon{
+  svg{
+    stroke: #A8A8A8;
+    fill: none;
+    transition-duration: 300ms;
+  }
+  &:hover{
+    svg{
+      stroke: darken(#A8A8A8,25%);
+    }
+  }
+}
+
+.btn--user{
+  svg{
+    fill: #A8A8A8;
+    transition-duration: 300ms;
+  }
+
+  &:hover{
+    svg{
+      fill: darken(#A8A8A8, 25%);
+    }
+  }
+}
