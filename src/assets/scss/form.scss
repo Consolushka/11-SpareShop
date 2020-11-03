@@ -1,0 +1,20 @@
+.form-input-wrapper{
+  position: relative;
+}
+
+.form--search-btn{
+  position: absolute;
+  top: 0;
+  right: 15px;
+}
+
+.form-input{
+  width: 100%;
+  background: $neutral-light;
+  border-radius: 3px;
+
+  &::placeholder{
+    font-size: 16px;
+    color: #656464;
+  }
+}

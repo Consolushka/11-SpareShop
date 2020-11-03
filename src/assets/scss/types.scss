@@ -1,0 +1,28 @@
+.panel__list{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.panel__list-item{
+  white-space: nowrap;
+  margin-right: 40px;
+  font-size: 20px;
+
+  &--active{
+    font-weight: 600;
+    border-bottom: 2px solid $primary-color;
+  }
+}
+
+.panel__search-form-input-wrapper{
+  position: relative;
+}
+
+.panel__search-form-input{
+  padding: 15px;
+  padding-left: 10px;
+}

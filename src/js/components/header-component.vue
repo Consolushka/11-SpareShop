@@ -15,26 +15,26 @@
         </ul>
         <button class="btn header-menu-btn">
           <svg width="33" height="27">
-            <use xlink:href="/assets/img/sprite.svg#burger"></use>
+            <use xlink:href="/assets/img/sprite.svg#icon-burger"></use>
           </svg>
         </button>
         <svg width="70" height="38">
-          <use xlink:href="/assets/img/sprite.svg#logo"></use>
+          <use xlink:href="/assets/img/sprite.svg#icon-logo"></use>
         </svg>
         <div class="header__user-options">
           <button class="btn header__user-options-item btn--icon">
             <svg width="26" height="23">
-              <use xlink:href="/assets/img/sprite.svg#favorite"></use>
+              <use xlink:href="/assets/img/sprite.svg#icon-favorite"></use>
             </svg>
           </button>
-          <button class="btn header__user-options-item btn--user">
+          <button class="btn header__user-options-item btn--reverse">
             <svg width="21" height="25">
-              <use xlink:href="/assets/img/sprite.svg#user"></use>
+              <use xlink:href="/assets/img/sprite.svg#icon-user"></use>
             </svg>
           </button>
           <button class="btn header__user-options-item btn--icon">
             <svg width="27" height="24">
-              <use xlink:href="/assets/img/sprite.svg#basket"></use>
+              <use xlink:href="/assets/img/sprite.svg#icon-basket"></use>
             </svg>
           </button>
         </div>

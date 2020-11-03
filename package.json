@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
-    "build": "webpack --config ./build/webpack.build.conf.js"
+    "build": "webpack --config ./build/webpack.build.conf.js",
+    "images": "gulp build"
   },
   "browserslist": [
     "> 1%",
@@ -29,6 +30,7 @@
     "vue"
   ],
   "dependencies": {
+    "gulp-rename": "^2.0.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -40,6 +42,10 @@
     "css-loader": "^4.1.1",
     "cssnano": "^4.1.10",
     "file-loader": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-svgstore": "^7.0.1",
+    "gulp-webp": "^4.0.1",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
