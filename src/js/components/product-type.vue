@@ -30,52 +30,7 @@
         </div>
       </article>
       <ul class="types__list">
-        <li class="types__list-item card">
-          <div class="types__list-item">
-            <h4 class="types__list title title--h4"></h4>
-            <button class="btn btn--reverse types__list-item-btn">Перейти
-              <svg width="6" height="10">
-                <use xlink:href="/assets/img/sprite.svg#icon-small-arrow"></use>
-              </svg>
-            </button>
-          </div>
-          <svg></svg>
-          <div class="types__list-item">
-            <h4 class="types__list title title--h4"></h4>
-            <button class="btn btn--icon types__list-item-btn">Перейти
-              <svg></svg>
-            </button>
-          </div>
-          <svg></svg>
-          <div class="types__list-item">
-            <h4 class="types__list title title--h4"></h4>
-            <button class="btn btn--icon types__list-item-btn">Перейти
-              <svg></svg>
-            </button>
-          </div>
-          <svg></svg>
-          <div class="types__list-item">
-            <h4 class="types__list title title--h4"></h4>
-            <button class="btn btn--icon types__list-item-btn">Перейти
-              <svg></svg>
-            </button>
-          </div>
-          <svg></svg>
-          <div class="types__list-item">
-            <h4 class="types__list title title--h4"></h4>
-            <button class="btn btn--icon types__list-item-btn">Перейти
-              <svg></svg>
-            </button>
-          </div>
-          <svg></svg>
-          <div class="types__list-item">
-            <h4 class="types__list title title--h4"></h4>
-            <button class="btn btn--icon types__list-item-btn">Перейти
-              <svg></svg>
-            </button>
-          </div>
-          <svg></svg>
-        </li>
+        <type-card v-for="type in this.types" :key="type.id" v-bind:typeObject=type></type-card>
       </ul>
     </div>
   </section>
@@ -83,7 +38,12 @@
 
 <script>
 export default {
-  name: "product-type"
+  name: "product-type",
+  data: function () {
+    return {
+      types: window.dataBase.types
+    }
+  }
 }
 </script>
 

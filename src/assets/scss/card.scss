@@ -1,0 +1,32 @@
+.card {
+  display: block;
+  border: 1px solid #CDCDCD;
+  border-radius: 3px;
+  padding: 20px;
+  padding-bottom: 31px;
+  position: relative;
+}
+
+.card__features {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.card__features-item {
+  margin-right: 20px;
+}
+
+.card__features__sales {
+  margin-left: 0;
+  margin-right: auto;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #ffffff;
+  width: 63px;
+  height: 25px;
+  font-weight: 600;
+  padding: 7px 15px;
+  background: linear-gradient(91.1deg, $gradient-color 1.17%, $primary-color 99.31%);
+  transform: rotate(-90deg);
+}
