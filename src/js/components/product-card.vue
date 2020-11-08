@@ -18,7 +18,13 @@
         </svg>
       </div>
     </div>
-    <img :src=product.imgPath :alt=product.title>
+    <img :src=product.imgPath :alt=product.title class="card__img">
+    <div class="card__info">
+      <h4 class="title title--h4">
+        {{ product.title }}
+      </h4>
+      <p class="card__info-price">{{ product.price }}</p>
+    </div>
   </a>
 </template>
 
@@ -32,5 +38,41 @@ export default {
 </script>
 
 <style scoped>
+.card {
+  display: block;
+  text-align: center;
+  border: 1px solid #CDCDCD;
+  border-radius: 3px;
+  padding-bottom: 31px;
+  position: relative;
+}
+
+.card__features {
+  height: 63px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.card__features-item {
+  margin-right: 20px;
+}
+
+.card__features__sales {
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #ffffff;
+  width: 63px;
+  height: 25px;
+  font-weight: 600;
+  padding: 7px 15px;
+  background: linear-gradient(91.1deg, $ gradient-color 1.17%, $ primary-color 99.31%);
+  transform: rotate(-90deg);
+  left: -20px;
+  right: auto;
+}
 
 </style>
