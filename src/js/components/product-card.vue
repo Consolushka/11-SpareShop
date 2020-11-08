@@ -1,6 +1,7 @@
 <template>
   <a href="" class="card">
     <div class="card__features">
+      <div>{{product.title}}</div>
       <div v-if="product.isSale" class="card__features__sales">sale</div>
       <button class="btn btn--icon card__features-item card__features__favorite">
         <svg width="25" height="22">

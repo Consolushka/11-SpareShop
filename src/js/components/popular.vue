@@ -4,7 +4,7 @@
       <h3 class="popular-title title title--h3">Популярные товары</h3>
       <ul class="panel__list popular__panel">
         <li class="panel__list-item popular__panel-item" v-for="type in types" :key="type.id">
-          <button class="btn" @click.prevent="selectType(type.id)">{{ type.title }}</button>
+          <button class="btn" @click.prevent="currentTypeId=type.id">{{ type.title }}</button>
         </li>
       </ul>
       <ul>
@@ -26,24 +26,22 @@ export default {
   },
   data() {
     return {
-      currentTypeId: 0
+      currentTypeId: 0,
+      popProducts: {}
     }
   },
   computed: {
     popular() {
-      return this.popularList[this.currentTypeId]
+      return this.popularList[this.currentTypeId] ?? []
     },
     popularProducts() {
-      if (!this.popular) {
-        return {}
+      if (this.popProducts[this.currentTypeId]) {
+        return this.popProducts[this.currentTypeId];
       }
 
-      return Object.fromEntries(Object.entries(this.products).filter(([key, value]) => this.popular.includes(parseInt(key))));
-    }
-  },
-  methods: {
-    selectType: function (typeId) {
-      this.currentTypeId = typeId;
+      return this.popProducts[this.currentTypeId] = Object.fromEntries(Object.entries(this.products).filter(([key, value]) => {
+        return this.popular.includes(parseInt(key))
+      }));
     }
   }
 }

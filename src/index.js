@@ -28,5 +28,10 @@ const app = new Vue({
     }
   },
   mounted() {
+  },
+  methods:{
+    test() {
+      this.database.products['1133'].title='123123123';
+    }
   }
 })
