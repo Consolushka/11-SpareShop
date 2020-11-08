@@ -21,5 +21,12 @@ Vue.component("popular", require("./js/components/popular.vue").default)
 Vue.component("product-card", require("./js/components/product-card.vue").default)
 // Vue init
 const app = new Vue({
-  el: '#app'
+  el: '#app',
+  data() {
+    return {
+      database: require('./js/db').default
+    }
+  },
+  mounted() {
+  }
 })

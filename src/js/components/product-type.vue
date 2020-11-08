@@ -39,10 +39,11 @@
 <script>
 export default {
   name: "product-type",
-  data: function () {
-    return {
-      types: window.dataBase.types
-    }
+  props: {
+    types: Array
+  },
+  mounted() {
+    console.log(this.types);
   }
 }
 </script>

@@ -13,8 +13,8 @@
         <main>
           <promo></promo>
           <shares></shares>
-          <product-type></product-type>
-          <popular></popular>
+          <product-type :types="database.types"></product-type>
+          <popular :types="database.types" :products="database.products" :popular-list="database.popular"></popular>
         </main>
         <footer>
         </footer>

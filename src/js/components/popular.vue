@@ -4,12 +4,12 @@
       <h3 class="popular-title title title--h3">Популярные товары</h3>
       <ul class="panel__list popular__panel">
         <li class="panel__list-item popular__panel-item" v-for="type in types" :key="type.id">
-          <button class="btn" @click="selectType(type.id)">{{ type.title }}</button>
+          <button class="btn" @click.prevent="selectType(type.id)">{{ type.title }}</button>
         </li>
       </ul>
       <ul>
-        <li v-for="popularItem in popular" :key="popularItem.id">
-          <product-card v-bind:product=returnProduct(popularItem.id)></product-card>
+        <li v-for="product in popularProducts">
+          <product-card :product=product></product-card>
         </li>
       </ul>
     </div>
@@ -19,19 +19,31 @@
 <script>
 export default {
   name: "popular",
-  data: function () {
+  props: {
+    types: Array,
+    products: Object,
+    popularList: Object,
+  },
+  data() {
     return {
-      types: window.dataBase.types,
-      popular: ''
+      currentTypeId: 0
+    }
+  },
+  computed: {
+    popular() {
+      return this.popularList[this.currentTypeId]
+    },
+    popularProducts() {
+      if (!this.popular) {
+        return {}
+      }
+
+      return Object.fromEntries(Object.entries(this.products).filter(([key, value]) => this.popular.includes(parseInt(key))));
     }
   },
   methods: {
     selectType: function (typeId) {
-      this.popular = window.dataBase.popular[typeId]
-    },
-    returnProduct(productId) {
-      console.log(window.dataBase.getProductById(productId))
-      return window.dataBase.getProductById(productId);
+      this.currentTypeId = typeId;
     }
   }
 }
