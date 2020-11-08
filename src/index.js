@@ -19,7 +19,13 @@ Vue.component("product-type", require("./js/components/product-type.vue").defaul
 Vue.component("type-card", require("./js/components/type-card.vue").default)
 Vue.component("popular", require("./js/components/popular.vue").default)
 Vue.component("product-card", require("./js/components/product-card.vue").default)
+Vue.component("types-panel", require("./js/components/types-panel.vue").default)
 // Vue init
 const app = new Vue({
-  el: '#app'
+  el: '#app',
+  data() {
+    return {
+      database: require('./js/db.js').default
+    }
+  }
 })

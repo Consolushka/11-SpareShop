@@ -13,8 +13,8 @@
         <main>
           <promo></promo>
           <shares></shares>
-          <product-type v-bind:types="window.dataBase.types"></product-type>
-          <popular></popular>
+          <product-type :types="database.types"></product-type>
+          <popular :types="database.types" :populars="database.popular" :products="database.products"></popular>
         </main>
         <footer>
         </footer>

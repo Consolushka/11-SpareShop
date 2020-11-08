@@ -1,31 +1,53 @@
 .btn {
+  display: block;
   cursor: pointer;
   background: none;
   border: none;
   padding: 0;
 }
 
-.btn--icon{
-  svg{
+.btn--icon {
+  svg {
     stroke: #A8A8A8;
     fill: none;
     transition-duration: 300ms;
   }
-  &:hover{
-    svg{
-      stroke: darken(#A8A8A8,25%);
+
+  &:hover {
+    svg {
+      stroke: darken(#A8A8A8, 25%);
     }
   }
 }
 
-.btn--reverse{
-  svg{
+.btn--buy {
+  background-color: $primary-color;
+  padding: 8px 20px;
+  border-radius: 10px 0 0 0;
+}
+
+.btn--classic {
+  background-color: $neutral-light;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 600;
+  color: #BDBEC2;
+  transition-duration: 300ms;
+
+  &:hover {
+    background-color: darken($neutral-light, 10%);
+    color: darken(#BDBEC2, 10%);
+  }
+}
+
+.btn--reverse {
+  svg {
     fill: #A8A8A8;
     transition-duration: 300ms;
   }
 
-  &:hover{
-    svg{
+  &:hover {
+    svg {
       fill: darken(#A8A8A8, 25%);
     }
   }

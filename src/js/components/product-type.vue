@@ -30,7 +30,7 @@
         </div>
       </article>
       <ul class="types__list">
-        <type-card v-for="type in this.types" :key="type.id" v-bind:typeObject=type></type-card>
+        <type-card v-for="type in types" :key="type.id" :typeObject=type></type-card>
       </ul>
     </div>
   </section>

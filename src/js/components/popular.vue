@@ -2,16 +2,13 @@
   <section class="popular">
     <div class="container">
       <h3 class="popular-title title title--h3">Популярные товары</h3>
-      <ul class="panel__list popular__panel">
-        <li class="panel__list-item popular__panel-item" v-for="type in types" :key="type.id">
-          <button class="btn" @click="selectType(type.id)">{{ type.title }}</button>
+      <types-panel :types="types" @changed-type="changeType"></types-panel>
+      <ul class="popular__list">
+        <li class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
+          <product-card :product="popularItem"></product-card>
         </li>
       </ul>
-      <ul>
-        <li v-for="popularItem in popular" :key="popularItem.id">
-          <product-card v-bind:product=returnProduct(popularItem.id)></product-card>
-        </li>
-      </ul>
+      <a href="#" class="btn btn--classic popular-more">Показать еще</a>
     </div>
   </section>
 </template>
@@ -19,24 +16,60 @@
 <script>
 export default {
   name: "popular",
+  props: {
+    types: Array,
+    populars: Object,
+    products: Object
+  },
   data: function () {
     return {
-      types: window.dataBase.types,
-      popular: ''
+      currentTypeID: 0,
+      popProducts: {}
+    }
+  },
+  computed: {
+    popularList() {
+      console.log(this.populars[this.currentTypeID]);
+      return this.populars[this.currentTypeID]
+    },
+    popularProducts() {
+      if (this.popProducts[this.currentTypeID]) {
+        return this.popProducts[this.currentTypeID];
+      }
+
+      return this.popProducts[this.currentTypeID] = Object.fromEntries(Object.entries(this.products).filter(([key, value]) => {
+        return this.popularList.includes(parseInt(key))
+      }));
     }
   },
   methods: {
-    selectType: function (typeId) {
-      this.popular = window.dataBase.popular[typeId]
-    },
-    returnProduct(productId) {
-      console.log(window.dataBase.getProductById(productId))
-      return window.dataBase.getProductById(productId);
+    changeType(id) {
+      this.currentTypeID = id;
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.popular {
+  text-align: center;
+}
 
+.popular-title {
+  margin-bottom: 25px;
+}
+
+.popular .panel__list-item .btn {
+  text-transform: lowercase;
+}
+
+.popular__list {
+  margin-bottom: 40px;
+}
+
+.popular-more {
+  margin: 0 auto;
+  width: 252px;
+  padding: 16px;
+}
 </style>

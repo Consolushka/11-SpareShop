@@ -23,8 +23,13 @@
       <h4 class="title title--h4">
         {{ product.title }}
       </h4>
-      <p class="card__info-price">{{ product.price }}</p>
+      <p class="card__info-price">{{ product.price }} &#8381</p>
     </div>
+    <button class="btn btn--icon btn--buy card__buy">
+      <svg width="20" height="24">
+        <use xlink:href="/assets/img/sprite.svg#icon-packet"></use>
+      </svg>
+    </button>
   </a>
 </template>
 
@@ -37,8 +42,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+@import 'src/assets/scss/utils/vars.scss';
+
 .card {
+  color: $default-color;
   display: block;
   text-align: center;
   border: 1px solid #CDCDCD;
@@ -69,10 +77,16 @@ export default {
   height: 25px;
   font-weight: 600;
   padding: 7px 15px;
-  background: linear-gradient(91.1deg, $ gradient-color 1.17%, $ primary-color 99.31%);
+  background: linear-gradient(91.1deg, $gradient-color 1.17%, $primary-color 99.31%);
   transform: rotate(-90deg);
   left: -20px;
   right: auto;
+}
+
+.card__buy {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 </style>
