@@ -28,7 +28,7 @@ gulp.task("images", function () {
 gulp.task("webp", function () {
   return gulp.src("src/assets/img/*.{png,jpg}")
     .pipe(webp({quality: 80}))
-    .pipe(gulp.dest("src/img"));
+    .pipe(gulp.dest("src/assets/img"));
 });
 
 gulp.task("svgstore", function () {

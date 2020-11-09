@@ -14,6 +14,15 @@ name: "promo"
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.promo {
+  margin-bottom: 50px;
+}
+
+.promo-item-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 </style>

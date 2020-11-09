@@ -50,6 +50,30 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.header {
+  padding-top: 30px;
+}
+
+.header-menu-btn {
+  padding-top: 3px;
+}
+
+.header-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 27px;
+}
+
+.header__user-options {
+  padding-top: 3px;
+  display: flex;
+}
+
+.header__user-options-item {
+  margin-right: 9.3px;
+}
 
 </style>

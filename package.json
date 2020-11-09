@@ -31,7 +31,8 @@
   ],
   "dependencies": {
     "gulp-rename": "^2.0.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-simple-accordion": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",

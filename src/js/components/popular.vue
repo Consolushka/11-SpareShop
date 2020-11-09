@@ -53,6 +53,7 @@ export default {
 <style lang="scss">
 .popular {
   text-align: center;
+  margin-bottom: 80px;
 }
 
 .popular-title {

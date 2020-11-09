@@ -20,6 +20,17 @@ Vue.component("type-card", require("./js/components/type-card.vue").default)
 Vue.component("popular", require("./js/components/popular.vue").default)
 Vue.component("product-card", require("./js/components/product-card.vue").default)
 Vue.component("types-panel", require("./js/components/types-panel.vue").default)
+Vue.component("advertising", require("./js/components/advertising.vue").default)
+Vue.component("similar", require("./js/components/similar-comp.vue").default)
+Vue.component("footer-comp", require("./js/components/footer-comp.vue").default)
+
+import VueSimpleAccordion from 'vue-simple-accordion';
+import 'vue-simple-accordion/dist/vue-simple-accordion.css';
+
+Vue.use(VueSimpleAccordion, {
+  // ... Options go here
+});
+
 // Vue init
 const app = new Vue({
   el: '#app',
