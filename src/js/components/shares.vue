@@ -138,4 +138,8 @@ export default {
   color: $primary-color;
 }
 
+.slick-dots {
+  width: 98%;
+}
+
 </style>

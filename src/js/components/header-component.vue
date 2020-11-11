@@ -13,11 +13,11 @@
             <a href="#" class="header-nav-item-link">Доставка и оплата</a>
           </li>
         </ul>
-        <button class="btn header-menu-btn">
-          <svg width="33" height="27">
-            <use xlink:href="/assets/img/sprite.svg#icon-burger"></use>
-          </svg>
-        </button>
+        <Push :width="242">
+          <a id="home" href="#">
+            <span>Войти</span>
+          </a>
+        </Push>
         <svg width="70" height="38">
           <use xlink:href="/assets/img/sprite.svg#icon-logo"></use>
         </svg>
@@ -45,7 +45,13 @@
 </template>
 
 <script>
+import {Slide, Push} from 'vue-burger-menu'
+
 export default {
+  components: {
+    Slide,
+    Push
+  },
   name: "header-component"
 }
 </script>
@@ -74,6 +80,10 @@ export default {
 
 .header__user-options-item {
   margin-right: 9.3px;
+}
+
+.line-style {
+  height: 12%;
 }
 
 </style>

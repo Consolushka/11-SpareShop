@@ -103,4 +103,8 @@ export default {
 .slick-next:before {
   color: $primary-color;
 }
+
+.slick-dots {
+  width: 98%;
+}
 </style>
