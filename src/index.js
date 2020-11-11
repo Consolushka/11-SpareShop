@@ -15,14 +15,15 @@ Vue.component("header-component", require("./js/components/header-component.vue"
 Vue.component("production", require("./js/components/production.vue").default)
 Vue.component("promo", require("./js/components/promo.vue").default)
 Vue.component("shares", require("./js/components/shares.vue").default)
-Vue.component("product-type", require("./js/components/product-type.vue").default)
+Vue.component("categories", require("./js/components/categories.vue").default)
 Vue.component("type-card", require("./js/components/type-card.vue").default)
 Vue.component("popular", require("./js/components/popular.vue").default)
-Vue.component("product-card", require("./js/components/product-card.vue").default)
+Vue.component("card-product", require("./js/components/card-product.vue").default)
 Vue.component("types-panel", require("./js/components/types-panel.vue").default)
 Vue.component("advertising", require("./js/components/advertising.vue").default)
 Vue.component("similar", require("./js/components/similar-comp.vue").default)
 Vue.component("footer-comp", require("./js/components/footer-comp.vue").default)
+Vue.component("card-share", require("./js/components/card-share.vue").default)
 
 import VueSimpleAccordion from 'vue-simple-accordion';
 import 'vue-simple-accordion/dist/vue-simple-accordion.css';

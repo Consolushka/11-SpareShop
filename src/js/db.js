@@ -54,6 +54,18 @@ export default {
     0: [1133, 1134, 1135, 1136],
     1: []
   },
+  shares: [
+    {
+      id: 1137,
+      sale: 300,
+      endOfSale: new Date("2020-11-11T00:00:00")
+    },
+    {
+      id: 1137,
+      sale: 300,
+      endOfSale: new Date("2020-12-11T00:00:00")
+    }
+  ],
   products: {
     1133: {
       imgPath: '/assets/img/1133.png',
@@ -88,6 +100,15 @@ export default {
       price: '11 232',
       inStock: 0,
       isSale: true,
+      isWinter: false,
+      isSummer: true
+    },
+    1137: {
+      imgPath: '/assets/img/bulb.png',
+      title: 'Лампочка mini...',
+      price: '500',
+      inStock: 10,
+      isSale: false,
       isWinter: false,
       isSummer: true
     }

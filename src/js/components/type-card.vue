@@ -1,5 +1,5 @@
 <template>
-  <li class="types__list-item card">
+  <li class="types__list-item">
     <a href="#" class="btn btn--reverse types__list-item-link">
       <div class="types__list-item-info">
         <h4 class="types__list-item-title title--h4">{{ this.typeObject.title }}</h4>

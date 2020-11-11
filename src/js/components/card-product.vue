@@ -53,6 +53,7 @@ export default {
   border-radius: 3px;
   padding-bottom: 31px;
   position: relative;
+  height: 349px;
 }
 
 .card__features {

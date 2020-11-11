@@ -4,9 +4,11 @@
       <h3 class="popular-title title title--h3">Популярные товары</h3>
       <types-panel :types="types" @changed-type="changeType"></types-panel>
       <ul class="popular__list">
-        <li class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
-          <product-card :product="popularItem"></product-card>
-        </li>
+        <VueSlickCarousel :arrows="true" :dots="true">
+          <li class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
+            <card-product :product="popularItem"></card-product>
+          </li>
+        </VueSlickCarousel>
       </ul>
       <a href="#" class="btn btn--classic popular-more">Показать еще</a>
     </div>
@@ -14,7 +16,13 @@
 </template>
 
 <script>
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+
+import VueSlickCarousel from 'vue-slick-carousel'
+
 export default {
+  components: {VueSlickCarousel},
   name: "popular",
   props: {
     types: Array,
@@ -51,6 +59,9 @@ export default {
 </script>
 
 <style lang="scss">
+
+@import "src/assets/scss/utils/vars.scss";
+
 .popular {
   text-align: center;
   margin-bottom: 80px;
@@ -72,5 +83,24 @@ export default {
   margin: 0 auto;
   width: 252px;
   padding: 16px;
+}
+
+.slick-prev {
+  left: 0;
+  transform: translateX(-50%);
+}
+
+.slick-next {
+  right: 0;
+  transform: translateX(50%);
+}
+
+.slick-slider {
+  padding: 0 20px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: $primary-color;
 }
 </style>
