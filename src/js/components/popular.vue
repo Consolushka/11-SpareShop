@@ -3,13 +3,38 @@
     <div class="container">
       <h3 class="popular-title title title--h3">Популярные товары</h3>
       <types-panel :types="types" @changed-type="changeType"></types-panel>
-      <ul class="popular__list">
-        <VueSlickCarousel :arrows="true" :dots="true">
-          <li class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
-            <card-product :product="popularItem"></card-product>
-          </li>
+      <div class="popular__list">
+        <VueSlickCarousel v-if="clientWidth<1170" :arrows="true" :dots="true">
+          <article class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
+            <card-product
+              :product="popularItem"
+              :user="user"
+              @addedProd="added"
+            ></card-product>
+          </article>
         </VueSlickCarousel>
-      </ul>
+        <div v-else>
+          <VueSlickCarousel :arrows="true" :dots="true" v-if="popularListLength>4" :slidesToShow="3"
+                            :slidesToScroll="1">
+            <article class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
+              <card-product
+                :product="popularItem"
+                :user="user"
+                @addedProd="added"
+              ></card-product>
+            </article>
+          </VueSlickCarousel>
+        </div>
+        <div class="popular__list-wrapper" v-else>
+          <article class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
+            <card-product
+              :product="popularItem"
+              :user="user"
+              @addedProd="added"
+            ></card-product>
+          </article>
+        </div>
+      </div>
       <a href="#" class="btn btn--classic popular-more">Показать еще</a>
     </div>
   </section>
@@ -27,7 +52,8 @@ export default {
   props: {
     types: Array,
     populars: Object,
-    products: Object
+    products: Object,
+    user: Object
   },
   data: function () {
     return {
@@ -36,12 +62,23 @@ export default {
     }
   },
   computed: {
+    clientWidth() {
+      return document.documentElement.clientWidth;
+    },
     popularList() {
-      console.log(this.populars[this.currentTypeID]);
       return this.populars[this.currentTypeID]
+    },
+    popularListLength() {
+      let count = 0;
+      this.popularList.forEach((item, i) => {
+        count = i;
+      })
+      console.log(count);
+      return count;
     },
     popularProducts() {
       if (this.popProducts[this.currentTypeID]) {
+        console.log(this.popProducts[this.currentTypeID]);
         return this.popProducts[this.currentTypeID];
       }
 
@@ -53,6 +90,9 @@ export default {
   methods: {
     changeType(id) {
       this.currentTypeID = id;
+    },
+    added(len) {
+      this.$emit('added-prod', len);
     }
   }
 }
@@ -85,26 +125,39 @@ export default {
   padding: 16px;
 }
 
-.slick-prev {
-  left: 0;
-  transform: translateX(-50%);
+.popular {
+  .slick-prev {
+    left: 0;
+    transform: translateX(-50%);
+  }
+
+  .slick-next {
+    right: 0;
+    transform: translateX(50%);
+  }
+
+  .slick-slider {
+    padding: 0 20px;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: $primary-color;
+  }
+
+  .slick-dots {
+    width: 98%;
+  }
 }
 
-.slick-next {
-  right: 0;
-  transform: translateX(50%);
-}
+@media (min-width: 1170px) {
+  .popular__list-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.slick-slider {
-  padding: 0 20px;
-}
-
-.slick-prev:before,
-.slick-next:before {
-  color: $primary-color;
-}
-
-.slick-dots {
-  width: 98%;
+  .popular__list-item {
+    width: 270px;
+  }
 }
 </style>

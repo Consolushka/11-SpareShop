@@ -21,5 +21,13 @@ export default {
 </script>
 
 <style lang="scss">
+@import "src/assets/scss/utils/vars.scss";
 
+.panel__list-item {
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    border-color: $primary-color;
+  }
+}
 </style>

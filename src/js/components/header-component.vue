@@ -1,26 +1,32 @@
 <template>
-  <header class="header">
+  <header class="header" @addedProd="console.log('123123')">
     <div class="container">
       <div class="header-wrapper">
         <ul class="header-nav desktop-only">
           <li class="header-nav-item">
-            <a href="#" class="header-nav-item-link">Магазины</a>
+            <a href="#" class="link header-nav-item-link">Магазины</a>
           </li>
           <li class="header-nav-item">
-            <a href="#" class="header-nav-item-link">Акции</a>
+            <a href="#" class="link header-nav-item-link">Акции</a>
           </li>
           <li class="header-nav-item">
-            <a href="#" class="header-nav-item-link">Доставка и оплата</a>
+            <a href="#" class="link header-nav-item-link">Доставка и оплата</a>
           </li>
         </ul>
-        <Push :width="242">
+        <Slide :width="'242'" class="mobile-only">
           <a id="home" href="#">
             <span>Войти</span>
           </a>
-        </Push>
-        <svg width="70" height="38">
+        </Slide>
+        <svg class="header-logo">
           <use xlink:href="/assets/img/sprite.svg#icon-logo"></use>
         </svg>
+        <button class="header-location desktop-only btn btn--icon">
+          <svg width="26" height="27">
+            <use xlink:href="/assets/img/sprite.svg#icon-location"></use>
+          </svg>
+          <span>Санкт-Петербург, ул <br> Большая Конюшенная, д 19</span>
+        </button>
         <div class="header__user-options">
           <button class="btn header__user-options-item btn--icon">
             <svg width="26" height="23">
@@ -32,10 +38,11 @@
               <use xlink:href="/assets/img/sprite.svg#icon-user"></use>
             </svg>
           </button>
-          <button class="btn header__user-options-item btn--icon">
+          <button class="btn header__user-options-item header__user-options-item--basket btn--icon">
             <svg width="27" height="24">
               <use xlink:href="/assets/img/sprite.svg#icon-basket"></use>
             </svg>
+            <span class="header__user-options-item-count"></span>
           </button>
         </div>
       </div>
@@ -48,15 +55,26 @@
 import {Slide, Push} from 'vue-burger-menu'
 
 export default {
+  props: {
+    cart: Object
+  },
   components: {
     Slide,
     Push
   },
-  name: "header-component"
+  name: "header-component",
+  methods: {
+    cartCount(cart) {
+      console.log('123123');
+    }
+  }
 }
 </script>
 
 <style lang="scss">
+@import "src/assets/scss/utils/vars.scss";
+
+
 .header {
   padding-top: 30px;
 }
@@ -73,6 +91,39 @@ export default {
   margin-bottom: 27px;
 }
 
+.header-logo {
+  width: 70px;
+  height: 38px;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 457px;
+
+  a {
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+.header-location {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: $default-color;
+  width: 330px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 20px;
+  font-family: $mainFont;
+
+  svg {
+    margin-right: 5px;
+  }
+}
+
 .header__user-options {
   padding-top: 3px;
   display: flex;
@@ -84,6 +135,23 @@ export default {
 
 .line-style {
   height: 12%;
+}
+
+@media (min-width: 1170px) {
+  .header-wrapper {
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .header-logo {
+    width: 102px;
+    height: 51px;
+    margin: 0 auto;
+  }
+
+  .header__user-options {
+    margin-left: auto;
+  }
 }
 
 </style>

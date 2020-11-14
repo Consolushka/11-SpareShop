@@ -8,22 +8,23 @@
               <button class="btn">Поиск по Vin</button>
             </li>
             <li class="panel__list-item">
-              <button class="btn">Поиск по Vin</button>
+              <button class="btn">Поиск по марке</button>
             </li>
             <li class="panel__list-item">
-              <button class="btn">Поиск по Vin</button>
+              <button class="btn">Поиск по названию товара</button>
             </li>
             <li class="panel__list-item">
-              <button class="btn">Поиск по Vin</button>
+              <button class="btn">Поиск по артикулу</button>
             </li>
           </ul>
           <form action="" class="panel__search-form form form--search">
             <label class="form-input-wrapper">
               <input type="text" class="panel__search-form-input form-input" placeholder="Введите марку автомобиля">
               <button class="btn btn--icon form--search-btn">
-                <svg width="23" height="24">
+                <svg width="23" height="24" class="mobile-only">
                   <use xlink:href="/assets/img/sprite.svg#icon-search"></use>
                 </svg>
+                <span>Искать</span>
               </button>
             </label>
           </form>
@@ -158,6 +159,45 @@ export default {
   transition-duration: 300ms;
   font-size: 20px;
   color: #C4C4C4;
+}
+
+@media (min-width: 1170px) {
+  .types {
+
+    .panel__list-item {
+      border: none;
+      border-radius: 5px;
+      padding: 11px 20px;
+
+      &--active {
+        background: $neutral-light;
+      }
+    }
+  }
+
+  .types__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .types__list-item {
+    width: 370px;
+    transition-duration: 300ms;
+
+    .types__list-item-title {
+      transition-duration: 300ms;
+    }
+
+    &:hover {
+      border-color: transparent;
+      box-shadow: 3px 3px 20px rgba(50, 50, 50, 0.25);
+
+      .types__list-item-title {
+        color: $primary-color;
+      }
+    }
+  }
 }
 
 </style>

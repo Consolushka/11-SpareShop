@@ -7,7 +7,7 @@
       <li class="production-list-item">
         <button class="btn btn--toggle">Каталог ТО</button>
       </li>
-      <li class="production-list-item">
+      <li class="production-list-item production-list-item--active">
         <button class="btn btn--toggle">Шины</button>
       </li>
       <li class="production-list-item">
@@ -26,7 +26,7 @@
         <button class="btn btn--toggle">Аксессуары</button>
       </li>
     </ul>
-    <div class="production-fading"></div>
+    <div class="production-fading mobile-only"></div>
   </div>
 </template>
 
@@ -37,9 +37,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import "src/assets/scss/utils/vars.scss";
+
 .production-wrapper {
   position: relative;
   margin-bottom: 28px;
+  border-top: 1px solid lighten($default-color, 40%);
+  border-bottom: 1px solid lighten($default-color, 40%);
+  padding: 14px 0;
 }
 
 .production-fading {
@@ -53,6 +58,7 @@ export default {
 }
 
 .production-list {
+  padding: 0;
   display: flex;
   overflow-x: hidden;
   flex-direction: row;
@@ -67,4 +73,28 @@ export default {
   white-space: nowrap;
 }
 
+@media (min-width: 1170px) {
+  .production-list {
+    justify-content: space-between;
+    overflow: visible;
+  }
+
+  .production-list-item {
+    margin: 0;
+    font-size: 20px;
+    position: relative;
+
+    &--active {
+
+      &:before {
+        position: absolute;
+        bottom: -15.5px;
+        content: "";
+        width: 100%;
+        height: 3px;
+        background: $primary-color;
+      }
+    }
+  }
+}
 </style>

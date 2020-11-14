@@ -25,7 +25,7 @@
       </h4>
       <p class="card__info-price">{{ product.price }} &#8381</p>
     </div>
-    <button class="btn btn--icon btn--buy card__buy">
+    <button class="btn btn--icon btn--buy card__buy" @click.prevent="addToCart(product.id)">
       <svg width="20" height="24">
         <use xlink:href="/assets/img/sprite.svg#icon-packet"></use>
       </svg>
@@ -37,7 +37,19 @@
 export default {
   name: "product-card",
   props: {
-    product: Object
+    product: Object,
+    user: Object
+  },
+  methods: {
+    addToCart(id) {
+      if (Object.keys(this.user.cart).includes(id.toString())) {
+        this.user.cart[id].count++;
+      } else {
+        this.user.cart[id] = {id: id, count: 1};
+        this.$emit('addedProd', Object.keys(this.user.cart).length)
+      }
+
+    }
   }
 }
 </script>
@@ -51,9 +63,34 @@ export default {
   text-align: center;
   border: 1px solid #CDCDCD;
   border-radius: 3px;
+  transition-duration: 300ms;
   padding-bottom: 31px;
   position: relative;
   height: 349px;
+
+  &:after {
+    position: absolute;
+    width: 85%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    padding: 18px 22px;
+    content: "быстрый просмотр";
+    background: #FFFFFF;
+    opacity: 0.9;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+
+  &:hover {
+    border-color: transparent;
+    box-shadow: 3px 3px 20px rgba(50, 50, 50, 0.25);
+
+    &:after {
+      display: block;
+    }
+  }
 }
 
 .card__features {

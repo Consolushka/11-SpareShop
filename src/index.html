@@ -9,12 +9,15 @@
   <body>
     <div class="wrapper">
       <div id="app">
-        <header-component></header-component>
+        <header-component :cart="database.user.cart" @addedProd=""></header-component>
         <main>
-          <promo></promo>
-          <shares :sharedprod="database.shares" :products="database.products"></shares>
+          <div class="flex-wrapper">
+            <promo></promo>
+            <shares :sharedprod="database.shares" :products="database.products"></shares>
+          </div>
           <categories :types="database.types"></categories>
-          <popular :types="database.types" :populars="database.popular" :products="database.products"></popular>
+          <popular :user="database.user" :types="database.types" :populars="database.popular"
+                   :products="database.products" @added-prod="console.log('hmhm')"></popular>
           <advertising></advertising>
         </main>
         <footer>

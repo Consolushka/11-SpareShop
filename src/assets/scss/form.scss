@@ -19,6 +19,15 @@
   }
 }
 
-.form-submit {
-
+@media (min-width: 1170px) {
+  .form--search-btn {
+    transform: translateY(-27%);
+    border-radius: 3px;
+    right: 0;
+    padding: 18px 40px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 14px;
+    background-color: $primary-color;
+  }
 }

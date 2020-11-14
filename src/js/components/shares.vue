@@ -40,106 +40,38 @@ export default {
 .shares {
   padding: 0 9px;
   margin-bottom: 80px;
+  position: relative;
 }
 
-.share {
-  text-align: center;
-  position: relative;
-  border: 1px solid #CDCDCD;
-  border-radius: 3px;
-
-  &:before {
-    position: absolute;
-    font-size: 12px;
-    content: "акция";
-    text-transform: uppercase;
-    color: #fff;
+.shares {
+  .slick-prev {
     left: 0;
-    top: 8px;
-    display: block;
-    padding: 6px 23px;
-    background: linear-gradient(91.1deg, $gradient-color 1.17%, $primary-color 99.31%);
-    transform: rotate(-90deg) translate(-25%, -119%)
+    transform: translateX(-50%);
+  }
+
+  .slick-next {
+    right: 0;
+    transform: translateX(50%);
+  }
+
+  .slick-slider {
+    padding: 0 20px;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: $primary-color;
+  }
+
+  .slick-dots {
+    width: 98%;
   }
 }
 
-.share__window {
-  position: relative;
-  padding-top: 53px;
-  margin-bottom: 15px;
-}
-
-.share__window-price {
-  text-align: center;
-  position: absolute;
-  width: fit-content;
-  right: 18px;
-  top: 15px;
-}
-
-.share__window-price-new {
-  color: $primary-color;
-  font-size: 27px;
-}
-
-.share__window-price-old {
-  color: $neutral-primary;
-  position: relative;
-
-  &:after {
-    content: "";
-    left: 0;
-    bottom: 0;
-    transform: rotate(-13deg) translateY(-12px);
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background-color: $neutral-primary;
+@media (min-width: 1170px) {
+  .shares {
+    width: 23%;
   }
-}
-
-.share__window-image {
-  margin-bottom: 15px;
-}
-
-.share__timer {
-  background-color: $neutral-light;
-  padding-top: 15px;
-}
-
-.share__timer-remaining {
-  padding: 0 45px;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: flex-start;
-
-  svg {
-    margin-right: 15px;
-  }
-}
-
-.slick-prev {
-  left: 0;
-  transform: translateX(-50%);
-}
-
-.slick-next {
-  right: 0;
-  transform: translateX(50%);
-}
-
-.slick-slider {
-  padding: 0 20px;
-}
-
-.slick-prev:before,
-.slick-next:before {
-  color: $primary-color;
-}
-
-.slick-dots {
-  width: 98%;
 }
 
 </style>

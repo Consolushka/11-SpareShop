@@ -51,23 +51,24 @@ export default {
     }
   ],
   popular: {
-    0: [1133, 1134, 1135, 1136],
+    0: [1133, 1134, 1135, 1136, 1135, 1134, 1133],
     1: []
   },
   shares: [
     {
       id: 1137,
       sale: 300,
-      endOfSale: new Date("2020-11-11T00:00:00")
+      endOfSale: new Date('2020-11-11T00:00:00')
     },
     {
       id: 1137,
       sale: 300,
-      endOfSale: new Date("2020-12-11T00:00:00")
+      endOfSale: new Date('2020-12-11T00:00:00')
     }
   ],
   products: {
     1133: {
+      id: 1133,
       imgPath: '/assets/img/1133.png',
       title: 'Ремень',
       price: '440',
@@ -77,6 +78,7 @@ export default {
       isSummer: false
     },
     1134: {
+      id: 1134,
       imgPath: '/assets/img/1134.png',
       title: 'Шина 205/80 R16 104Q Misha RF Power Grum',
       price: '11 680',
@@ -86,6 +88,7 @@ export default {
       isSummer: false
     },
     1135: {
+      id: 1135,
       imgPath: '/assets/img/1135.png',
       title: 'Фара Nokian 2025',
       price: '680',
@@ -95,6 +98,7 @@ export default {
       isSummer: false
     },
     1136: {
+      id: 1136,
       imgPath: '/assets/img/1136.png',
       title: 'Шина 245/60 R18 105T Contyther Crosh Conta...',
       price: '11 232',
@@ -104,6 +108,7 @@ export default {
       isSummer: true
     },
     1137: {
+      id: 1137,
       imgPath: '/assets/img/bulb.png',
       title: 'Лампочка mini...',
       price: '500',
@@ -112,5 +117,13 @@ export default {
       isWinter: false,
       isSummer: true
     }
+  },
+  user: {
+    id: 0,
+    fName: 'John',
+    sName: 'Doe',
+    birth: new Date('2000-11-11T00:00:00'),
+    favorites: [],
+    cart: {}
   }
 }
