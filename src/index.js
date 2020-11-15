@@ -32,6 +32,8 @@ Vue.use(VueSimpleAccordion, {
   // ... Options go here
 });
 
+export const eventBus = new Vue();
+
 // Vue init
 const app = new Vue({
   el: '#app',
@@ -39,5 +41,8 @@ const app = new Vue({
     return {
       database: require('./js/db.js').default
     }
+  },
+  mounted() {
+    window.global.userCart = this.database.user.cart;
   }
 })

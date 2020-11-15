@@ -1,6 +1,6 @@
 <template>
   <section class="footer">
-    <div class="container">
+    <div class="container footer-form-wrapper">
       <h3 class="footer-title">Подпишитесь на нашу рассылку
         и узнавайте о акция быстрее</h3>
       <form class="footer-form">
@@ -8,7 +8,7 @@
         <button class="btn footer-form-submit" type="submit">Отправить</button>
       </form>
     </div>
-    <vsa-list>
+    <vsa-list v-if="clientWidth<1170">
       <vsa-item v-for="item in listOfItems" :key="item.id">
         <vsa-heading>
           {{ item.heading }}
@@ -19,6 +19,34 @@
         </vsa-content>
       </vsa-item>
     </vsa-list>
+    <div class="footer__info" v-else>
+      <div class="footer__info-tab">
+        <h4 class="footer__info-tab-title">Информация</h4>
+        <ul class="footer__info-tab-list">
+          <li class="footer__info-tab-list-item">О компании</li>
+          <li class="footer__info-tab-list-item">Контакты</li>
+          <li class="footer__info-tab-list-item">Реквизиты</li>
+          <li class="footer__info-tab-list-item">Магазины</li>
+        </ul>
+      </div>
+      <div class="footer__info-tab">
+        <h4 class="footer__info-tab-title">Сервисный центр</h4>
+        <ul class="footer__info-tab-list">
+          <li class="footer__info-tab-list-item">Доставка и самовывоз</li>
+          <li class="footer__info-tab-list-item">Оплата</li>
+          <li class="footer__info-tab-list-item">Возврат-обмен</li>
+          <li class="footer__info-tab-list-item">Новости</li>
+        </ul>
+      </div>
+      <div class="footer__info-tab">
+        <h4 class="footer__info-tab-title">Интернет магазин</h4>
+        <ul class="footer__info-tab-list">
+          <li class="footer__info-tab-list-item">Акции</li>
+          <li class="footer__info-tab-list-item">Договор оферты</li>
+          <li class="footer__info-tab-list-item">Политика обработки персональных данных</li>
+        </ul>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -43,6 +71,11 @@ export default {
       ]
 
     }
+  },
+  computed: {
+    clientWidth() {
+      return document.documentElement.clientWidth;
+    },
   }
 }
 </script>
@@ -96,5 +129,35 @@ export default {
   border-bottom: 1px solid #D6D6D6;
 }
 
+@media (min-width: 1170px) {
+  .footer {
+    display: flex;
+    justify-content: flex-start;
+  }
 
+  .footer-title {
+    text-align: left;
+  }
+
+  .footer-form-wrapper {
+    max-width: 294px;
+    margin-right: 160px;
+  }
+
+  .footer__info {
+    display: flex;
+    width: 100%;
+    font-size: 14px;
+    justify-content: space-between;
+  }
+
+  .footer__info-tab-title {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .footer__info-tab {
+    max-width: 156px;
+  }
+}
 </style>

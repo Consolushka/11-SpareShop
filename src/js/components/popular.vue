@@ -4,27 +4,15 @@
       <h3 class="popular-title title title--h3">Популярные товары</h3>
       <types-panel :types="types" @changed-type="changeType"></types-panel>
       <div class="popular__list">
-        <VueSlickCarousel v-if="clientWidth<1170" :arrows="true" :dots="true">
+        <VueSlickCarousel v-if="popularListLength>4" v-bind="settings">
           <article class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
             <card-product
               :product="popularItem"
               :user="user"
-              @addedProd="added"
-            ></card-product>
+              @addedProd="added">
+            </card-product>
           </article>
         </VueSlickCarousel>
-        <div v-else>
-          <VueSlickCarousel :arrows="true" :dots="true" v-if="popularListLength>4" :slidesToShow="3"
-                            :slidesToScroll="1">
-            <article class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
-              <card-product
-                :product="popularItem"
-                :user="user"
-                @addedProd="added"
-              ></card-product>
-            </article>
-          </VueSlickCarousel>
-        </div>
         <div class="popular__list-wrapper" v-else>
           <article class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
             <card-product
@@ -58,13 +46,46 @@ export default {
   data: function () {
     return {
       currentTypeID: 0,
-      popProducts: {}
+      popProducts: {},
+      settings: {
+        "dots": true,
+        "infinite": true,
+        "speed": 500,
+        "slidesToShow": 4,
+        "slidesToScroll": 4,
+        "initialSlide": 0,
+        "responsive": [
+          {
+            "breakpoint": 1170,
+            "settings": {
+              "slidesToShow": 3,
+              "slidesToScroll": 3,
+              "infinite": true,
+              "dots": true
+            }
+          },
+          {
+            "breakpoint": 600,
+            "settings": {
+              "slidesToShow": 2,
+              "slidesToScroll": 2,
+              "infinite": true,
+              "initialSlide": 2
+            }
+          },
+          {
+            "breakpoint": 480,
+            "settings": {
+              "slidesToShow": 1,
+              "slidesToScroll": 1,
+              "infinite": true,
+            }
+          }
+        ]
+      }
     }
   },
   computed: {
-    clientWidth() {
-      return document.documentElement.clientWidth;
-    },
     popularList() {
       return this.populars[this.currentTypeID]
     },
@@ -150,6 +171,10 @@ export default {
   }
 }
 
+.popular__list-item {
+  padding: 8px;
+}
+
 @media (min-width: 1170px) {
   .popular__list-wrapper {
     display: flex;
@@ -158,6 +183,7 @@ export default {
 
   .popular__list-item {
     width: 270px;
+    padding: 15px;
   }
 }
 </style>

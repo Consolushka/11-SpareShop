@@ -51,7 +51,7 @@ export default {
     }
   ],
   popular: {
-    0: [1133, 1134, 1135, 1136, 1135, 1134, 1133],
+    0: [1133, 1134, 1135, 1136, 1137, 1138],
     1: []
   },
   shares: [
@@ -116,7 +116,17 @@ export default {
       isSale: false,
       isWinter: false,
       isSummer: true
-    }
+    },
+    1138: {
+      id: 1138,
+      imgPath: '/assets/img/1133.png',
+      title: 'Ремень',
+      price: '440',
+      inStock: 100,
+      isSale: false,
+      isWinter: false,
+      isSummer: false
+    },
   },
   user: {
     id: 0,

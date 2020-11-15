@@ -20,7 +20,7 @@
     </div>
     <img :src=product.imgPath :alt=product.title class="card__img">
     <div class="card__info">
-      <h4 class="title title--h4">
+      <h4 class="card__info-title title title--h4">
         {{ product.title }}
       </h4>
       <p class="card__info-price">{{ product.price }} &#8381</p>
@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import {eventBus} from '../../index.js'
+
 export default {
   name: "product-card",
   props: {
@@ -44,9 +46,10 @@ export default {
     addToCart(id) {
       if (Object.keys(this.user.cart).includes(id.toString())) {
         this.user.cart[id].count++;
+        eventBus.$emit('changedCountOfCartItem');
       } else {
         this.user.cart[id] = {id: id, count: 1};
-        this.$emit('addedProd', Object.keys(this.user.cart).length)
+        eventBus.$emit('addedProd', Object.keys(this.user.cart).length)
       }
 
     }
@@ -66,7 +69,7 @@ export default {
   transition-duration: 300ms;
   padding-bottom: 31px;
   position: relative;
-  height: 349px;
+  height: 403px;
 
   &:after {
     position: absolute;
@@ -77,6 +80,7 @@ export default {
     display: none;
     padding: 18px 22px;
     content: "быстрый просмотр";
+    color: $default-color;
     background: #FFFFFF;
     opacity: 0.9;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
@@ -86,6 +90,7 @@ export default {
   &:hover {
     border-color: transparent;
     box-shadow: 3px 3px 20px rgba(50, 50, 50, 0.25);
+    color: $primary-color;
 
     &:after {
       display: block;
@@ -119,6 +124,20 @@ export default {
   transform: rotate(-90deg);
   left: -20px;
   right: auto;
+}
+
+.card__img {
+  margin-bottom: 15px;
+}
+
+.card__info-title {
+  margin-bottom: 20px;
+}
+
+.card__info-price {
+  font-size: 30px;
+  font-weight: 700;
+
 }
 
 .card__buy {

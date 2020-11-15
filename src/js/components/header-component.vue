@@ -42,7 +42,7 @@
             <svg width="27" height="24">
               <use xlink:href="/assets/img/sprite.svg#icon-basket"></use>
             </svg>
-            <span class="header__user-options-item-count"></span>
+            <span class="header__user-options-item-count js-cart-count"></span>
           </button>
         </div>
       </div>
@@ -53,6 +53,7 @@
 
 <script>
 import {Slide, Push} from 'vue-burger-menu'
+import {eventBus} from '../../index.js'
 
 export default {
   props: {
@@ -67,6 +68,11 @@ export default {
     cartCount(cart) {
       console.log('123123');
     }
+  },
+  created() {
+    eventBus.$on('addedProd', awesome => {
+      document.querySelector('.js-cart-count').textContent = Object.keys(this.cart).length.toString();
+    })
   }
 }
 </script>

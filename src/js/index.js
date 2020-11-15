@@ -3,9 +3,7 @@
 console.log('its work');
 
 (function () {
-  window.dataBase = {
-    getProductById(id) {
-      return this.products[id]
-    }
+  window.global = {
+    userCart: []
   }
 })();
