@@ -1,7 +1,7 @@
 <template>
   <section class="shares">
     <div class="container">
-      <VueSlickCarousel :arrows="true" :dots="true">
+      <VueSlickCarousel v-bind="settings">
         <card-share v-for="item in items" :key="item.id" :product="item"></card-share>
       </VueSlickCarousel>
     </div>
@@ -20,6 +20,21 @@ export default {
   props: {
     sharedprod: Array,
     products: Object
+  },
+  data() {
+    return {
+      settings: {
+        "arrows": false,
+        "dots": false,
+        "infinite": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "autoplay": true,
+        "speed": 750,
+        "autoplaySpeed": 5000,
+        "cssEase": "linear"
+      }
+    }
   },
   computed: {
     items() {
@@ -71,6 +86,15 @@ export default {
 @media (min-width: 1170px) {
   .shares {
     width: 23%;
+    padding: 0;
+
+    .container {
+      padding: 0;
+    }
+
+    .slick-slider {
+      padding: 0;
+    }
   }
 }
 

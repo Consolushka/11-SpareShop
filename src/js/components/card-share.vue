@@ -41,6 +41,7 @@ export default {
 
   &:before {
     position: absolute;
+    z-index: 2;
     font-size: 12px;
     content: "акция";
     text-transform: uppercase;

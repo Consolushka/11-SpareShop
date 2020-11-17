@@ -126,6 +126,10 @@ export default {
 .popular {
   text-align: center;
   margin-bottom: 80px;
+
+  .panel__list-item-btn--active {
+    color: $primary-color;
+  }
 }
 
 .popular-title {

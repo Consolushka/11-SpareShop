@@ -3,20 +3,7 @@
     <div class="container">
       <article class="types__search">
         <div class="types__searching-panel panel">
-          <ul class="panel__list">
-            <li class="panel__list-item panel__list-item--active">
-              <button class="btn">Поиск по Vin</button>
-            </li>
-            <li class="panel__list-item">
-              <button class="btn">Поиск по марке</button>
-            </li>
-            <li class="panel__list-item">
-              <button class="btn">Поиск по названию товара</button>
-            </li>
-            <li class="panel__list-item">
-              <button class="btn">Поиск по артикулу</button>
-            </li>
-          </ul>
+          <types-panel :types="categories"></types-panel>
           <form action="" class="panel__search-form form form--search">
             <label class="form-input-wrapper">
               <input type="text" class="panel__search-form-input form-input" placeholder="Введите марку автомобиля">
@@ -41,7 +28,8 @@
 export default {
   name: "product-type",
   props: {
-    types: Array
+    types: Array,
+    categories: Array
   }
 }
 </script>
@@ -165,11 +153,20 @@ export default {
   .types {
 
     .panel__list-item {
-      border: none;
+      &:hover {
+        border: none;
+      }
+    }
+
+    .panel__list-item-btn {
       border-radius: 5px;
       padding: 11px 20px;
 
       &--active {
+        background: $neutral-light;
+      }
+
+      &:hover {
         background: $neutral-light;
       }
     }

@@ -50,6 +50,20 @@ export default {
       iconPath: "/assets/img/sprite.svg#icon-accessories"
     }
   ],
+  categories: [
+    {
+      title: 'Поиск по Vim',
+    },
+    {
+      title: 'Поиск по марке',
+    },
+    {
+      title: 'Поиск по названию товара',
+    },
+    {
+      title: 'Поиск по артикулу',
+    }
+  ],
   popular: {
     0: [1133, 1134, 1135, 1136, 1137, 1138],
     1: []

@@ -41,8 +41,5 @@ const app = new Vue({
     return {
       database: require('./js/db.js').default
     }
-  },
-  mounted() {
-    window.global.userCart = this.database.user.cart;
   }
 })

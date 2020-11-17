@@ -15,7 +15,7 @@
             <promo></promo>
             <shares :sharedprod="database.shares" :products="database.products"></shares>
           </div>
-          <categories :types="database.types"></categories>
+          <categories :types="database.types" :categories="database.categories"></categories>
           <popular :user="database.user" :types="database.types" :populars="database.popular"
                    :products="database.products" @added-prod="console.log('hmhm')"></popular>
           <advertising></advertising>

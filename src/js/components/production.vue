@@ -1,5 +1,6 @@
 <template>
   <div class="production-wrapper">
+    <hr class="js-production-hr" :style="returnMargin">
     <ul class="production-list container container--left">
       <li class="production-list-item">
         <button class="btn btn--toggle">Каталог запчастей</button>
@@ -27,12 +28,18 @@
       </li>
     </ul>
     <div class="production-fading mobile-only"></div>
+    <hr class="js-production-hr" :style="returnMargin">
   </div>
 </template>
 
 <script>
 export default {
-  name: "production"
+  name: "production",
+  computed: {
+    returnMargin() {
+      return "margin: 0 -" + Math.floor(((document.documentElement.clientWidth - 1170 - 16) / 2)).toString() + "px";
+    }
+  }
 }
 </script>
 
@@ -42,9 +49,10 @@ export default {
 .production-wrapper {
   position: relative;
   margin-bottom: 28px;
-  border-top: 1px solid lighten($default-color, 40%);
-  border-bottom: 1px solid lighten($default-color, 40%);
-  padding: 14px 0;
+
+  hr {
+    margin: 0;
+  }
 }
 
 .production-fading {
@@ -58,7 +66,7 @@ export default {
 }
 
 .production-list {
-  padding: 0;
+  padding: 14px 0;
   display: flex;
   overflow-x: hidden;
   flex-direction: row;
