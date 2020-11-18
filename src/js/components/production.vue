@@ -92,8 +92,13 @@ export default {
     font-size: 20px;
     position: relative;
 
-    &--active {
+    &:hover {
+      .btn {
+        color: $primary-color;
+      }
+    }
 
+    &--active {
       &:before {
         position: absolute;
         bottom: -15.5px;

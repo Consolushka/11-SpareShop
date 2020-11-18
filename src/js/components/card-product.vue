@@ -2,7 +2,9 @@
   <a href="" class="card">
     <div class="card__features">
       <div v-if="this.product.isSale" class="card__features__sales">sale</div>
-      <button class="btn btn--icon card__features-item card__features__favorite">
+      <button class="btn btn--icon card__features-item card__features__favorite"
+              :class="{'card__features__favorite--active': isActive}"
+              @click.prevent="addToFav(product.id); isActive = !isActive">
         <svg width="25" height="22">
           <use xlink:href="/assets/img/sprite.svg#icon-favorite"></use>
         </svg>
@@ -51,7 +53,17 @@ export default {
         this.user.cart[id] = {id: id, count: 1};
         eventBus.$emit('addedProd', Object.keys(this.user.cart).length)
       }
-
+    },
+    addToFav(id) {
+      if (!this.user.favorites.includes(id)) {
+        this.user.favorites.push(id);
+        console.log(this.user.favorites);
+      }
+    }
+  },
+  data() {
+    return {
+      isActive: false
     }
   }
 }
@@ -144,6 +156,13 @@ export default {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.card__features__favorite--active {
+  svg {
+    fill: $primary-color;
+    stroke: $primary-color;
+  }
 }
 
 </style>

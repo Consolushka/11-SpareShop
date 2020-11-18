@@ -42,7 +42,7 @@
             <svg width="27" height="24">
               <use xlink:href="/assets/img/sprite.svg#icon-basket"></use>
             </svg>
-            <span class="header__user-options-item-count js-cart-count"></span>
+            <span class="header__user-options-item-count js-cart-count" style="display: none"></span>
           </button>
         </div>
       </div>
@@ -72,6 +72,7 @@ export default {
   created() {
     eventBus.$on('addedProd', awesome => {
       document.querySelector('.js-cart-count').textContent = Object.keys(this.cart).length.toString();
+      document.querySelector('.js-cart-count').removeAttribute("style");
     })
   }
 }
@@ -137,6 +138,26 @@ export default {
 
 .header__user-options-item {
   margin-right: 9.3px;
+
+  &--basket {
+    position: relative;
+  }
+}
+
+.header__user-options-item-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  transform: translate(50%, 50%);
+  background: $primary-color;
+  border-radius: 50%;
+  font-size: 13px;
+  color: #ffffff;
 }
 
 .line-style {

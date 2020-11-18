@@ -72,12 +72,12 @@ export default {
     {
       id: 1137,
       sale: 300,
-      endOfSale: new Date('2020-11-11T00:00:00')
+      endOfSale: new Date('2020-11-12T00:00:00')
     },
     {
       id: 1137,
       sale: 300,
-      endOfSale: new Date('2020-12-11T00:00:00')
+      endOfSale: new Date('2020-12-12T00:00:00')
     }
   ],
   products: {

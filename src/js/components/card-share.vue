@@ -14,7 +14,13 @@
         <svg width="28" height="28">
           <use xlink:href="/assets/img/sprite.svg#icon-timer"></use>
         </svg>
-        <p class="share__timer-remaining-time">{{ product.endOfSale.valueOf() }}</p>
+        <div class="share__timer-remaining-time">
+          <p>До конца акции осталось</p>
+          <p>{{
+              this.hoursRemaining(product.endOfSale)
+            }}:{{ minutesRemaining(product.endOfSale) }}:{{ secRemaining(product.endOfSale) }}</p>
+        </div>
+        <p class="share__timer-remaining-time"></p>
       </div>
     </div>
   </a>
@@ -25,6 +31,25 @@ export default {
   name: "card-share",
   props: {
     product: Object
+  },
+  methods: {
+    hoursRemaining(end) {
+      let now = new Date().valueOf();
+      let ended = end.valueOf();
+      return Math.floor((ended - now) / 1000 / 3600).toString();
+    },
+    minutesRemaining(end) {
+      let now = new Date().valueOf();
+      let ended = end.valueOf();
+      let hours = this.hoursRemaining(end) * 1000 * 3600;
+      return Math.floor((ended - now - hours) / 1000 / 60).toString();
+    },
+    secRemaining(end) {
+      let now = new Date().valueOf();
+      let ended = end.valueOf();
+      let minutes = this.minutesRemaining(end) * 1000 * 60;
+      return Math.floor((ended - now - minutes) / 1000 / 3600 / 24).toString();
+    }
   }
 }
 </script>

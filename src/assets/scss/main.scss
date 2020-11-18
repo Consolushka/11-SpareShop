@@ -36,19 +36,19 @@ body {
 }
 
 .desktop-only {
-  display: none;
+  display: none !important;
 }
 
 .mobile-only {
-  display: block;
+  display: block !important;
 }
 
 @media (min-width: 1170px) {
   .desktop-only {
-    display: block;
+    display: block !important;
   }
   .mobile-only {
-    display: none;
+    display: none !important;
   }
 
   .flex-wrapper {
