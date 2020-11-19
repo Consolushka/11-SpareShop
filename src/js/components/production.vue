@@ -37,7 +37,7 @@ export default {
   name: "production",
   computed: {
     returnMargin() {
-      return "margin: 0 -" + Math.floor(((document.documentElement.clientWidth - 1170 - 16) / 2)).toString() + "px";
+      return "margin: 0 -" + Math.floor(((document.documentElement.clientWidth - 1170 - 18) / 2)).toString() + "px";
     }
   }
 }

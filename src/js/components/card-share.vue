@@ -15,7 +15,6 @@
           <use xlink:href="/assets/img/sprite.svg#icon-timer"></use>
         </svg>
         <div class="share__timer-remaining-time">
-          <p>До конца акции осталось</p>
           <p>{{
               this.hoursRemaining(product.endOfSale)
             }}:{{ minutesRemaining(product.endOfSale) }}:{{ secRemaining(product.endOfSale) }}</p>

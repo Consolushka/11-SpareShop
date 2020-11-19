@@ -25,7 +25,8 @@
       <h4 class="card__info-title title title--h4">
         {{ product.title }}
       </h4>
-      <p class="card__info-price">{{ product.price }} &#8381</p>
+      <p class="card__info-price" v-if="product.inStock!==0">{{ product.price }} &#8381</p>
+      <p class="card__info-price" v-else>Нет в наличии</p>
     </div>
     <button class="btn btn--icon btn--buy card__buy" @click.prevent="addToCart(product.id)">
       <svg width="20" height="24">

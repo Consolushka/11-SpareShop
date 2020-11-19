@@ -106,7 +106,7 @@ export default {
       imgPath: '/assets/img/1135.png',
       title: 'Фара Nokian 2025',
       price: '680',
-      inStock: 100,
+      inStock: 0,
       isSale: false,
       isWinter: false,
       isSummer: false
