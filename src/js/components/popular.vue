@@ -8,8 +8,7 @@
           <article class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
             <card-product
               :product="popularItem"
-              :user="user"
-              @addedProd="added">
+              :user="user">
             </card-product>
           </article>
         </VueSlickCarousel>
@@ -17,9 +16,8 @@
           <article class="popular__list-item" v-for="popularItem in popularProducts" :key="popularItem.id">
             <card-product
               :product="popularItem"
-              :user="user"
-              @addedProd="added"
-            ></card-product>
+              :user="user">
+            </card-product>
           </article>
         </div>
       </div>
@@ -111,9 +109,6 @@ export default {
   methods: {
     changeType(id) {
       this.currentTypeID = id;
-    },
-    added(len) {
-      this.$emit('added-prod', len);
     }
   }
 }

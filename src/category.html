@@ -11,7 +11,7 @@
   <div id="app">
     <header-component :cart="database.user.cart"></header-component>
     <route></route>
-    <category-product :products="database.products"></category-product>
+    <category-product :products="database.products" :user="database.user"></category-product>
     <footer>
       <footer-comp></footer-comp>
     </footer>

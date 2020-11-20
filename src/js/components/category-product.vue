@@ -17,9 +17,8 @@
         </button>
       </div>
       <div class="category__products-list">
-        <article v-for="i in pagesCount">
-          <p v-for="p in pageProducts(i-1)">{{ p.title }}</p>
-        </article>
+        <category-page :products="selectPage(selectedPage)" :user="user"></category-page>
+        <button v-for="i in pagesCount" @click="selectPage(i)">{{ i }}</button>
       </div>
     </div>
   </section>
@@ -27,15 +26,19 @@
 
 <script>
 
+import {eventBus} from "../../index";
+
 export default {
   name: "category-product",
   props: {
     products: Object,
-    category: String
+    category: String,
+    user: Object
   },
   data() {
     return {
-      pageHelper: 0
+      pageHelper: 0,
+      selectedPage: 1
     }
   },
   computed: {
@@ -45,6 +48,16 @@ export default {
     }
   },
   methods: {
+    selectPage(page) {
+      this.selectedPage = page;
+      let newArr = [];
+      page -= 1;
+      for (let i = page * 3; i < page * 3 + 3 || this.products[i]; i++) {
+        console.log(i);
+        newArr.push(this.products[Object.keys(this.products)[i]]);
+      }
+      return newArr;
+    },
     pageProducts(page) {
       let newArr = [];
       for (let i = page * 3; i < page * 3 + 3 || this.products[i]; i++) {

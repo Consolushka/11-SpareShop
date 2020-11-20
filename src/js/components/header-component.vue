@@ -18,9 +18,11 @@
             <span>Войти</span>
           </a>
         </Slide>
-        <svg class="header-logo">
-          <use xlink:href="/assets/img/sprite.svg#icon-logo"></use>
-        </svg>
+        <a href="index.html" class="header-logo-wrapper">
+          <svg class="header-logo">
+            <use xlink:href="/assets/img/sprite.svg#icon-logo"></use>
+          </svg>
+        </a>
         <button class="header-location desktop-only btn btn--icon">
           <svg width="26" height="27">
             <use xlink:href="/assets/img/sprite.svg#icon-location"></use>
@@ -64,11 +66,6 @@ export default {
     Push
   },
   name: "header-component",
-  methods: {
-    cartCount(cart) {
-      console.log('123123');
-    }
-  },
   created() {
     eventBus.$on('addedProd', awesome => {
       document.querySelector('.js-cart-count').textContent = Object.keys(this.cart).length.toString();
