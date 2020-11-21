@@ -1,8 +1,8 @@
 <template>
   <ul class="panel__list">
     <li class="panel__list-item" v-for="(type,index) in types" :key="type.id">
-      <button class="panel__list-item-btn btn" :class="{'panel__list-item-btn--active': index===0}"
-              :data-title="type.title" @click="changeType(type.id,type.title)" :data-type="type.id">{{
+      <button class="panel__list-item-btn btn" :class="{'panel__list-item-btn--active': index===selectedTab}"
+              :data-title="type.title" @click="changeType(type.id,index)" :data-type="type.id">{{
           type.title
         }}
       </button>
@@ -16,27 +16,16 @@ export default {
   props: {
     types: Array
   },
-  methods: {
-    changeType(id, title) {
-      document.querySelectorAll('.panel__list-item-btn').forEach((item) => {
-        console.log(item.dataset.title, title);
-        if (item.dataset.title === title) {
-          console.log('yes');
-          item.classList.add('panel__list-item-btn--active');
-        }
-      })
-      this.$emit('changed-type', id);
+  data() {
+    return {
+      selectedTab: 0
     }
   },
-  mounted() {
-    /*document.querySelectorAll(".panel__list-item-btn").forEach((item) => {
-      item.addEventListener("click", (e) => {
-        document.querySelectorAll(".panel__list-item-btn").forEach((sItem) => {
-          sItem.classList.remove("panel__list-item-btn--active");
-        });
-        e.target.classList.add("panel__list-item-btn--active");
-      })
-    })*/
+  methods: {
+    changeType(id, index) {
+      this.selectedTab = index;
+      this.$emit('changed-type', id);
+    }
   }
 }
 </script>

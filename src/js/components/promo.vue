@@ -88,4 +88,27 @@ export default {
   }
 }
 
+.desktop-only {
+  display: none;
+}
+
+.mobile-only {
+  display: block;
+}
+
+@media (min-width: 1170px) {
+  .desktop-only {
+    display: block;
+  }
+  .mobile-only {
+    display: none;
+  }
+
+  .flex-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+  }
+}
+
 </style>

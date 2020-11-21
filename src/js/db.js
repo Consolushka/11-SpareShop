@@ -7,7 +7,8 @@ export default {
       href: '#',
       iconWidth: 35,
       iconHeight: 38,
-      iconPath: "/assets/img/sprite.svg#icon-chemicals"
+      iconPath: "/assets/img/sprite.svg#icon-chemicals",
+      prods: [1133, 1133, 1133, 1133, 1133]
     },
     {
       id: 1,

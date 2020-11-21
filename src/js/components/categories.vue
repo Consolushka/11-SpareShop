@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import {eventBus} from "../../index";
+
 export default {
   name: "product-type",
   props: {

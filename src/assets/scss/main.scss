@@ -35,29 +35,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.desktop-only {
-  display: none !important;
-}
-
-.mobile-only {
-  display: block !important;
-}
-
-@media (min-width: 1170px) {
-  .desktop-only {
-    display: block !important;
-  }
-  .mobile-only {
-    display: none !important;
-  }
-
-  .flex-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-  }
-}
-
 *,
 *:before,
 *:after {
