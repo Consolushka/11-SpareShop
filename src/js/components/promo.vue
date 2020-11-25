@@ -77,6 +77,10 @@ export default {
   }
 }
 
+.slick-slider.desktop-only {
+  display: none;
+}
+
 @media (min-width: 1170px) {
   .promo {
     width: 74%;
@@ -86,28 +90,10 @@ export default {
   .promo-slider {
     width: 100%;
   }
-}
 
-.desktop-only {
-  display: none;
-}
 
-.mobile-only {
-  display: block;
-}
-
-@media (min-width: 1170px) {
-  .desktop-only {
+  .slick-slider.desktop-only {
     display: block;
-  }
-  .mobile-only {
-    display: none;
-  }
-
-  .flex-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
   }
 }
 

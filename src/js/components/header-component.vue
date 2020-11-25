@@ -190,6 +190,10 @@ export default {
   .desktop-only {
     display: block;
   }
+
+  .header-nav.desktop-only {
+    display: flex;
+  }
   .mobile-only {
     display: none;
   }

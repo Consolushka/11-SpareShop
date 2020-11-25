@@ -83,6 +83,7 @@ export default {
   padding-bottom: 31px;
   position: relative;
   height: 403px;
+  margin-bottom: 30px;
 
   &:after {
     position: absolute;

@@ -8,7 +8,7 @@ export default {
       iconWidth: 35,
       iconHeight: 38,
       iconPath: "/assets/img/sprite.svg#icon-chemicals",
-      prods: [1133, 1133, 1133, 1133, 1133]
+      prods: [1133, 1134, 1135, 1137, 1136]
     },
     {
       id: 1,
@@ -100,7 +100,11 @@ export default {
       inStock: 100,
       isSale: true,
       isWinter: true,
-      isSummer: false
+      isSummer: false,
+      mark: 'BMW',
+      model: '1-series',
+      carcase: 'E81 3d',
+      modification: '116 d'
     },
     1135: {
       id: 1135,

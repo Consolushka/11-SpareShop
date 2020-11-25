@@ -27,6 +27,7 @@ Vue.component("card-share", require("./js/components/card-share.vue").default)
 Vue.component("route", require("./js/components/route.vue").default)
 Vue.component("category-product", require("./js/components/category-product.vue").default)
 Vue.component("category-page", require("./js/components/category-page.vue").default)
+Vue.component("category-advert", require("./js/components/category-advert.vue").default)
 
 import VueSimpleAccordion from 'vue-simple-accordion';
 import 'vue-simple-accordion/dist/vue-simple-accordion.css';
