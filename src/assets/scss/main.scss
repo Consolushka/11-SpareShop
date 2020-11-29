@@ -10,6 +10,7 @@
 
 html {
   line-height: $mainLineHeight;
+  overflow-x: hidden;
   font-size: $mainFontSize;
   color: $mainFontColor;
   height: 100%;
@@ -28,11 +29,20 @@ body {
   margin: 0 auto;
   padding: 0;
   max-width: 1170px;
+  position: absolute;
+  width: 100%;
+  transition-duration: 400ms;
   font-family: $mainFont;
   font-size: $mainFontSize;
   font-weight: $mainFontWeight;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: $desktopWidth) {
+  body {
+    position: static;
+  }
 }
 
 *,

@@ -13,11 +13,11 @@
             <a href="#" class="link header-nav-item-link">Доставка и оплата</a>
           </li>
         </ul>
-        <Slide :width="'242'" class="mobile-only">
-          <a id="home" href="#">
-            <span>Войти</span>
-          </a>
-        </Slide>
+        <button @click="SlideNav" class="header-nav-btn btn btn--reverse">
+          <svg width="33" height="27">
+            <use xlink:href="/assets/img/sprite.svg#icon-burger"></use>
+          </svg>
+        </button>
         <a href="index.html" class="header-logo-wrapper">
           <svg class="header-logo">
             <use xlink:href="/assets/img/sprite.svg#icon-logo"></use>
@@ -67,10 +67,16 @@ export default {
   },
   name: "header-component",
   created() {
-    eventBus.$on('addedProd', awesome => {
+    eventBus.$on('addedProd', () => {
       document.querySelector('.js-cart-count').textContent = Object.keys(this.cart).length.toString();
       document.querySelector('.js-cart-count').removeAttribute("style");
     })
+  },
+  methods: {
+    SlideNav() {
+      document.querySelector("body").classList.toggle("js-slide-right");
+      eventBus.$emit("SlideNav");
+    }
   }
 }
 </script>
@@ -78,6 +84,9 @@ export default {
 <style lang="scss">
 @import "src/assets/scss/utils/vars.scss";
 
+.js-slide-right {
+  transform: translateX(242px);
+}
 
 .header {
   padding-top: 30px;
@@ -189,6 +198,10 @@ export default {
 @media (min-width: 1170px) {
   .desktop-only {
     display: block;
+  }
+
+  .header-nav-btn {
+    display: none;
   }
 
   .header-nav.desktop-only {

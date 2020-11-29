@@ -11,6 +11,7 @@ import './assets/scss/main.scss'
 window.Vue = require('vue')
 
 // Vue components (for use in html)
+Vue.component("navigation", require("./js/components/navigation.vue").default)
 Vue.component("header-component", require("./js/components/header-component.vue").default)
 Vue.component("production", require("./js/components/production.vue").default)
 Vue.component("promo", require("./js/components/promo.vue").default)
@@ -28,6 +29,7 @@ Vue.component("route", require("./js/components/route.vue").default)
 Vue.component("category-product", require("./js/components/category-product.vue").default)
 Vue.component("category-page", require("./js/components/category-page.vue").default)
 Vue.component("category-advert", require("./js/components/category-advert.vue").default)
+Vue.component("filters", require("./js/components/filters.vue").default)
 
 import VueSimpleAccordion from 'vue-simple-accordion';
 import 'vue-simple-accordion/dist/vue-simple-accordion.css';

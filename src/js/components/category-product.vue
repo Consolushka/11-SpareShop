@@ -10,7 +10,7 @@
             </svg>
             По популярности
           </button>
-          <button class="btn btn--icon category__render-filter">
+          <button class="btn btn--icon category__render-filter" @click="SlideFilters">
             <svg width="13" height="13">
               <use xlink:href="/assets/img/sprite.svg#icon-filter"></use>
             </svg>
@@ -24,7 +24,7 @@
           :products="selectPage"
           :user="user"></category-page>
         <button
-          v-if="ProdsOnPage<category.length"
+          v-if="ProdsOnPage<category.length || selectedPage<pagesCount-1"
           class="btn btn--classic category__products-list-more"
           @click="ProdsOnPage+=2">Показать больше
         </button>
@@ -78,6 +78,11 @@ export default {
       }
       return newArr;
     }
+  },
+  methods: {
+    SlideFilters() {
+      document.querySelector("body").classList.add("js-slide-left");
+    }
   }
 }
 </script>
@@ -120,5 +125,9 @@ export default {
   button {
     margin-right: 15px;
   }
+}
+
+.js-slide-left {
+  transform: translateX(-100%);
 }
 </style>

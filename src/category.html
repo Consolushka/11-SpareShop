@@ -9,6 +9,8 @@
 <body>
 <div class="wrapper">
   <div id="app">
+    <navigation></navigation>
+    <filters></filters>
     <header-component :cart="database.user.cart"></header-component>
     <route></route>
     <category-product :products="database.products" :category="database.types[0].prods"
