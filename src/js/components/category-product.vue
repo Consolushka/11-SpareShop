@@ -17,6 +17,7 @@
             Фильтры
           </button>
         </div>
+        <filters></filters>
       </div>
       <div class="category__products-list">
         <category-page
