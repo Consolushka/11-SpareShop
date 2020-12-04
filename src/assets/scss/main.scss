@@ -72,5 +72,13 @@ li {
   list-style-type: none;
 }
 
+.visually-hidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 0;
+  width: 0;
+}
 // Modules:
 // example: @import "modules/my-module.scss";
