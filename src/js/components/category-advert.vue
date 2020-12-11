@@ -1,8 +1,8 @@
 <template>
-  <div class="category__advert">
+  <div class="category-advert">
     <div class="container">
-      <h3 class="title title--h3 category__advert-title">ШИНОМОНТАЖ</h3>
-      <p class="category__advert-desc">Любой сложности и без очередей</p>
+      <h3 class="title title--h3 category-advert-title">ШИНОМОНТАЖ</h3>
+      <p class="category-advert-desc">Любой сложности и без очередей</p>
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
 <style lang="scss">
 @import "src/assets/scss/utils/vars.scss";
 
-.category__advert {
+.category-advert {
   padding-top: 61px;
   padding-bottom: 46px;
   color: #ffffff;
@@ -24,7 +24,7 @@ export default {
   text-align: center;
 }
 
-.category__advert-title {
+.category-advert-title {
   font-size: 35px;
   margin-bottom: 29px;
   letter-spacing: 0.04em;
