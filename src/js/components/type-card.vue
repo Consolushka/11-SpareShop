@@ -1,6 +1,6 @@
 <template>
   <li class="types__list-item">
-    <a href="category.html" class="btn btn--reverse types__list-item-link" @click="">
+    <a :href="'category.html?id='+typeObject.id" class="btn btn--reverse types__list-item-link" @click="">
       <div class="types__list-item-info">
         <h4 class="types__list-item-title title--h4">{{ this.typeObject.title }}</h4>
         <p class="types__list-item-go">Перейти

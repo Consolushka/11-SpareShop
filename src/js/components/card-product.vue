@@ -1,5 +1,5 @@
 <template>
-  <a href="" class="card">
+  <a :href="'product.html?id='+product.id" class="card">
     <div class="card__features">
       <div v-if="this.product.isSale" class="card__features__sales">sale</div>
       <button class="btn btn--icon card__features-item card__features__favorite"

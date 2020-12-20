@@ -12,16 +12,14 @@
     <navigation></navigation>
     <header-component :cart="database.user.cart"></header-component>
     <route></route>
-    <category-product
+    <product-page
       :products="database.products"
-      :categories="database.types"
-      :user="database.user"></category-product>
+    ></product-page>
     <category-advert></category-advert>
     <footer>
       <footer-comp></footer-comp>
     </footer>
   </div>
 </div>
-
 </body>
 </html>

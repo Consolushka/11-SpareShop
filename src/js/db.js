@@ -76,8 +76,8 @@ export default {
       endOfSale: new Date('2020-11-12T00:00:00')
     },
     {
-      id: 1137,
-      sale: 300,
+      id: 1134,
+      sale: 1000,
       endOfSale: new Date('2020-12-12T00:00:00')
     }
   ],
@@ -86,21 +86,23 @@ export default {
       id: 1133,
       imgPath: '/assets/img/1133.png',
       title: 'Ремень',
-      price: '440',
+      price: 440,
       inStock: 100,
       isSale: false,
       isWinter: false,
-      isSummer: false
+      isSummer: false,
+      sold: 1200
     },
     1134: {
       id: 1134,
       imgPath: '/assets/img/1134.png',
       title: 'Шина 205/80 R16 104Q Misha RF Power Grum',
-      price: '11 680',
+      price: 11680,
       inStock: 100,
       isSale: true,
       isWinter: true,
       isSummer: false,
+      sold: 1310,
       mark: 'BMW',
       model: '1-series',
       carcase: 'E81 3d',
@@ -110,41 +112,45 @@ export default {
       id: 1135,
       imgPath: '/assets/img/1135.png',
       title: 'Фара Nokian 2025',
-      price: '680',
+      price: 680,
       inStock: 0,
       isSale: false,
       isWinter: false,
-      isSummer: false
+      isSummer: false,
+      sold: 1400
     },
     1136: {
       id: 1136,
       imgPath: '/assets/img/1136.png',
       title: 'Шина 245/60 R18 105T Contyther Crosh Conta...',
-      price: '11 232',
+      price: 11232,
       inStock: 0,
       isSale: true,
       isWinter: false,
-      isSummer: true
+      isSummer: true,
+      sold: 1500
     },
     1137: {
       id: 1137,
       imgPath: '/assets/img/bulb.png',
       title: 'Лампочка mini...',
-      price: '500',
+      price: 500,
       inStock: 10,
       isSale: false,
       isWinter: false,
-      isSummer: true
+      isSummer: true,
+      sold: 1410
     },
     1138: {
       id: 1138,
       imgPath: '/assets/img/1133.png',
       title: 'Ремень',
-      price: '440',
+      price: 440,
       inStock: 100,
       isSale: false,
       isWinter: false,
-      isSummer: false
+      isSummer: false,
+      sold: 10
     },
   },
   user: {

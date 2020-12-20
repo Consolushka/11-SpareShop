@@ -1,14 +1,14 @@
 <template>
   <div class="filters">
     <div class="container">
-      <button class="filters__back btn btn--icon" @click="DisableSlide">
+      <button class="filters__back btn btn--icon" @click="DisableSlide" v-show="clientWidth<1170">
         <svg width="13" height="9">
           <use xlink:href="/assets/img/sprite.svg#icon-arrow-left"></use>
         </svg>
       </button>
       <p class="filters__form-title filters-title">Фильтры</p>
       <div class="filters__switch-wrapper">
-        <button class="filters__form-title filters__switch btn"
+        <button class="filters__form-title filters__switch btn js-filters-param"
                 :class="{'filters__switch--active': formType==='params'}" @click="formType='params'">По параметрам
         </button>
         <button class="filters__form-title filters__switch btn" :class="{'filters__switch--active': formType==='mark'}"
@@ -24,11 +24,11 @@
             <label class="filters__form-season-state" :class="{'filters__form-season-state--active':isSummer}"
                    @click="isSummer = true; isWinter=false;">
               <span>Летние</span>
-              <input name="season" class="visually-hidden" value="summer" type="radio" checked>
+              <input name="season" class="visually-hidden" value="summer" type="radio" @change="ChangeSeason">
             </label>
             <label class="filters__form-season-state" :class="{'filters__form-season-state--active':isWinter}"
                    @click="isSummer = false; isWinter=true;">
-              <input name="season" class="visually-hidden" value="winter" type="radio">
+              <input name="season" class="visually-hidden" value="winter" type="radio" @change="ChangeSeason">
 
               <span>Зимние</span>
             </label>
@@ -134,20 +134,38 @@
             </select>
           </div>
         </div>
+        <button class="filters__form-show btn btn--primary" @click="renderProducts" type="button">Показать</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import {eventBus} from "../../index";
+
 export default {
   name: "filters",
+  props: {
+    products: Object
+  },
   data() {
     return {
       formType: "mark",
       isWinter: false,
       isSummer: false,
-      priceCoef: 0
+      priceCoef: 0,
+      desktopMargin: this.clientWidth - 1170,
+      currProds: []
+    }
+  },
+  mounted() {
+    if (this.clientWidth > 1170) {
+      document.querySelector(".js-filters-param").textContent = "Параметры";
+    }
+  },
+  computed: {
+    clientWidth() {
+      return document.documentElement.clientWidth;
     }
   },
   methods: {
@@ -169,12 +187,24 @@ export default {
       let PriceRange = document.querySelector(".filters__form-price");
       let toggleEnd = document.querySelector(".filters__form-price-toggle--end");
       let toggleStart = document.querySelector(".filters__form-price-toggle--start");
-      if (toggleEnd.getBoundingClientRect().x - toggleEnd.clientWidth * 2 <= PriceRange.clientWidth) {
-        if ((toggleStart.getBoundingClientRect().x + 20 < toggleEnd.getBoundingClientRect().x)) {
-          this.ShiftEndToggle(mouseEvt);
-        } else {
-          if (mouseEvt.clientX > toggleEnd.getBoundingClientRect().x + 3) {
+      if (this.clientWidth >= 1170) {
+        if (toggleEnd.getBoundingClientRect().x - (this.desktopMargin) / 2 + 10 <= PriceRange.clientWidth) {
+          if ((toggleStart.getBoundingClientRect().x + 20 < toggleEnd.getBoundingClientRect().x)) {
             this.ShiftEndToggle(mouseEvt);
+          } else {
+            if (mouseEvt.clientX > toggleEnd.getBoundingClientRect().x + 3) {
+              this.ShiftEndToggle(mouseEvt);
+            }
+          }
+        }
+      } else {
+        if (toggleEnd.getBoundingClientRect().x - toggleEnd.clientWidth * 2 <= PriceRange.clientWidth) {
+          if ((toggleStart.getBoundingClientRect().x + 20 < toggleEnd.getBoundingClientRect().x)) {
+            this.ShiftEndToggle(mouseEvt);
+          } else {
+            if (mouseEvt.clientX > toggleEnd.getBoundingClientRect().x + 3) {
+              this.ShiftEndToggle(mouseEvt);
+            }
           }
         }
       }
@@ -182,15 +212,27 @@ export default {
     ShiftStartToggle(evt) {
       let toggleStart = document.querySelector(".filters__form-price-toggle--start");
       if (evt.clientX - toggleStart.clientWidth * 2 >= 0) {
-        toggleStart.setAttribute("style", `left: ${evt.clientX - toggleStart.clientWidth * 2}px`);
+        if (this.clientWidth >= 1170) {
+          toggleStart.setAttribute("style", `left: ${evt.clientX - (this.desktopMargin) / 2 - 5}px`);
+          this.DrawRange();
+        } else {
+          toggleStart.setAttribute("style", `left: ${evt.clientX - toggleStart.clientWidth * 2}px`);
+        }
         this.DrawRange();
       }
     },
     ShiftEndToggle(evt) {
       let toggleEnd = document.querySelector(".filters__form-price-toggle--end");
-      if ((evt.clientX - toggleEnd.clientWidth * 2) * this.priceCoef <= 25000) {
-        toggleEnd.setAttribute("style", `left: ${evt.clientX - toggleEnd.clientWidth * 2}px`);
-        this.DrawRange();
+      if (this.clientWidth >= 1170) {
+        if ((evt.clientX - (this.desktopMargin) / 2) * this.priceCoef <= 25000) {
+          toggleEnd.setAttribute("style", `left: ${evt.clientX - (this.desktopMargin) / 2 - 5}px`);
+          this.DrawRange();
+        }
+      } else {
+        if ((evt.clientX - toggleEnd.clientWidth * 2) * this.priceCoef <= 25000) {
+          toggleEnd.setAttribute("style", `left: ${evt.clientX - toggleEnd.clientWidth * 2}px`);
+          this.DrawRange();
+        }
       }
     },
     StartDown() {
@@ -235,14 +277,45 @@ export default {
       let toggleStart = PriceRange.querySelector(".filters__form-price-toggle--start").getBoundingClientRect();
       let toggleEnd = PriceRange.querySelector(".filters__form-price-toggle--end").getBoundingClientRect();
       let width = toggleEnd.x - toggleStart.x;
-      RangeCurr.setAttribute("style", `left: ${toggleStart.x - 16}px; width: ${width}px; right: ${toggleEnd.x - 16}px`);
-      document.querySelector(".filters__form-price-state-input--end").value = Math.trunc((toggleEnd.x - 6) * this.priceCoef);
-      document.querySelector(".filters__form-price-state-input--start").value = Math.trunc((toggleStart.x - 16) * this.priceCoef);
+      if (this.clientWidth >= 1170) {
+        RangeCurr.setAttribute("style", `left: ${toggleStart.x - (this.desktopMargin) / 2 + 5}px; width: ${width}px; right: ${toggleEnd.x - (this.desktopMargin) / 2 + 5}px`);
+        document.querySelector(".filters__form-price-state-input--end").value = Math.trunc((toggleEnd.x - 6) * this.priceCoef);
+        document.querySelector(".filters__form-price-state-input--start").value = Math.trunc((toggleStart.x - 16) * this.priceCoef);
+      } else {
+        RangeCurr.setAttribute("style", `left: ${toggleStart.x - 16}px; width: ${width}px; right: ${toggleEnd.x - 16}px`);
+        document.querySelector(".filters__form-price-state-input--end").value = Math.trunc((toggleEnd.x - 6) * this.priceCoef);
+        document.querySelector(".filters__form-price-state-input--start").value = Math.trunc((toggleStart.x - 16) * this.priceCoef);
+      }
     },
     GetCoef() {
       if (this.priceCoef === 0) {
         this.priceCoef = 25000 / document.querySelector(".filters__form-price").clientWidth;
       }
+    },
+    renderProducts() {
+      this.currProds = [];
+      Object.keys(this.products).forEach((prod) => {
+        if (this.isWinter === this.isSummer) {
+          this.currProds.push(this.products[prod]);
+        } else {
+          if (this.isWinter === true) {
+            if (this.products[prod].isWinter === true) {
+              this.currProds.push(this.products[prod]);
+            }
+          } else {
+            if (this.isSummer === true) {
+              if (this.products[prod].isSummer === true) {
+                this.currProds.push(this.products[prod]);
+              }
+            }
+          }
+        }
+      });
+      console.log(this.currProds);
+      eventBus.$emit("renderProds", this.currProds);
+    },
+    ChangeSeason() {
+      console.log("change");
     }
   }
 }
@@ -482,5 +555,64 @@ export default {
 .filters__form-price-state-curr input {
   width: 43.5px;
   border-bottom: 1px solid $neutral-light;
+}
+
+@media (min-width: 1170px) {
+  .filters {
+    position: static;
+    transform: none;
+    width: 270px;
+    margin-right: 19px;
+
+    .container {
+      padding: 0;
+    }
+  }
+
+  .filters__switch {
+    border: none;
+    opacity: 0.5;
+    text-transform: uppercase;
+
+    &--active {
+      background: none;
+      color: $default-color;
+      border-bottom: 1px solid $primary-color;
+      opacity: 1;
+    }
+  }
+
+  .filters__form-season-state {
+    margin: 0;
+    margin-bottom: 15px;
+    border: none;
+  }
+
+
+  .filters__form-season-wrapper {
+    flex-direction: row;
+  }
+
+  .filters__form-season-state {
+
+    &::after {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      width: 14px;
+      height: 14px;
+      margin-left: 15px;
+      background: $primary-color;
+      color: #ffffff;
+      content: "✔";
+    }
+
+    &--active {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
 }
 </style>

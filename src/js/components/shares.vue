@@ -39,8 +39,9 @@ export default {
   computed: {
     items() {
       return this.sharedprod.map((item) => {
-        let product = this.products[item.id]
-        product['newPrice'] = product.price - item.sale;
+        let product = this.products[item.id];
+        console.log(Number(product.price) - Number(item.sale));
+        product['newPrice'] = Number(product.price) - Number(item.sale);
         product['endOfSale'] = item.endOfSale;
         return product;
       })

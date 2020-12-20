@@ -40,6 +40,14 @@
   }
 }
 
+.btn--primary {
+  background-color: $primary-color;
+  text-align: center;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 3px;
+}
+
 .btn--page {
   padding: 11px 15px;
   font-size: 18px;

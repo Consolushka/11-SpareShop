@@ -4,38 +4,40 @@
       <h2 class="category-title title title--h2">Шины</h2>
       <div class="category__render">
         <div class="category__render-wrapper">
-          <button class="btn btn--icon category__render-sort">
+          <button class="btn btn--icon category__render-sort" @click="ToggleSort">
             <svg width="13" height="19">
               <use xlink:href="/assets/img/sprite.svg#icon-sort"></use>
             </svg>
             По популярности
           </button>
-          <button class="btn btn--icon category__render-filter" @click="SlideFilters">
+          <button class="btn btn--icon category__render-filter" @click="SlideFilters" v-show="clientWidth<1170">
             <svg width="13" height="13">
               <use xlink:href="/assets/img/sprite.svg#icon-filter"></use>
             </svg>
             Фильтры
           </button>
         </div>
-        <filters></filters>
       </div>
       <div class="category__products-list">
-        <category-page
-          class="category__products-list-prod"
-          :products="selectPage"
-          :user="user"></category-page>
-        <button
-          v-if="ProdsOnPage<category.length || selectedPage<pagesCount-1"
-          class="btn btn--classic category__products-list-more"
-          @click="ProdsOnPage+=2">Показать больше
-        </button>
-        <div class="category__products-list-btns">
+        <filters :products="products"></filters>
+        <div class="category__products-list-prod-wrapper">
+          <category-page
+            class="category__products-list-prod"
+            :products="ProductsOnPage"
+            :user="user"></category-page>
           <button
-            v-for="i in pagesCount"
-            class="btn btn--page"
-            :class="{'btn--page--active': selectedPage===i}"
-            @click="selectedPage = i">{{ i }}
+            v-if="ProdsOnPage<category.length || selectedPage<NumberOfPages"
+            class="btn btn--classic category__products-list-more"
+            @click="ProdsOnPage+=3">Показать больше
           </button>
+          <div class="category__products-list-btns">
+            <button
+              v-for="i in NumberOfPages"
+              class="btn btn--page"
+              :class="{'btn--page--active': selectedPage===i}"
+              @click="selectedPage = i">{{ i }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -50,18 +52,25 @@ export default {
   name: "category-product",
   props: {
     products: Object,
-    category: Array,
+    categories: Array,
     user: Object
   },
   data() {
     return {
       pageHelper: 0,
+      currProducts: Object.values(this.products),
       selectedPage: 1,
-      ProdsOnPage: 3
+      ProdsOnPage: 3,
+      category: this.categories[Number(window.location.search.replace('?id=', ''))].prods,
+      isPopularIncrease: true
     }
   },
   computed: {
-    pagesCount() {
+    clientWidth() {
+      return document.documentElement.clientWidth;
+    },
+    NumberOfPages() {
+      console.log(this.currProducts);
       let count;
       if ((Math.floor(this.category.length / this.ProdsOnPage) + 1) * this.ProdsOnPage - this.ProdsOnPage >= this.category.length) {
         count = Math.floor(this.category.length / this.ProdsOnPage);
@@ -70,11 +79,11 @@ export default {
       }
       return count;
     },
-    selectPage() {
+    ProductsOnPage() {
       let newArr = [];
       for (let i = (this.selectedPage - 1) * 3; i < (this.selectedPage - 1) * this.ProdsOnPage + this.ProdsOnPage; i++) {
-        if (this.products[this.category[i]]) {
-          newArr.push(this.products[this.category[i]]);
+        if (this.currProducts[i]) {
+          newArr.push(this.currProducts[i]);
         }
       }
       return newArr;
@@ -83,6 +92,25 @@ export default {
   methods: {
     SlideFilters() {
       document.querySelector("body").classList.add("js-slide-left");
+    },
+    ToggleSort() {
+      if (this.isPopularIncrease === true) {
+        this.currProducts.sort((a, b) => a.sold < b.sold ? 1 : -1);
+      } else {
+        this.currProducts.sort((a, b) => a.sold > b.sold ? 1 : -1);
+      }
+      this.isPopularIncrease = !this.isPopularIncrease;
+    }
+  },
+  mounted() {
+    eventBus.$on("renderProds", (newArr) => {
+      console.log(newArr);
+      this.currProducts = newArr;
+    })
+  },
+  created() {
+    if (document.documentElement.clientWidth >= 1170) {
+      this.ProdsOnPage = 9;
     }
   }
 }
@@ -130,5 +158,20 @@ export default {
 
 .js-slide-left {
   transform: translateX(-100%);
+}
+
+@media (min-width: 1170px) {
+  .category {
+    .container {
+      padding: 0;
+    }
+  }
+  .category__products-list {
+    display: flex;
+  }
+  .category__render {
+    margin: 0;
+    margin-bottom: 20px;
+  }
 }
 </style>
