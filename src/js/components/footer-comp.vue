@@ -75,7 +75,7 @@ export default {
   computed: {
     clientWidth() {
       return document.documentElement.clientWidth;
-    },
+    }
   }
 }
 </script>

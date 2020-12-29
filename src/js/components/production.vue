@@ -27,7 +27,6 @@
         <button class="btn btn--toggle">Аксессуары</button>
       </li>
     </ul>
-    <div class="production-fading mobile-only"></div>
     <hr class="js-production-hr" :style="returnMargin">
   </div>
 </template>
@@ -53,16 +52,6 @@ export default {
   hr {
     margin: 0;
   }
-}
-
-.production-fading {
-  position: absolute;
-  width: 25%;
-  left: auto;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: linear-gradient(270.12deg, #FFFFFF 0.16%, rgba(255, 255, 255, 0) 96.64%);
 }
 
 .production-list {

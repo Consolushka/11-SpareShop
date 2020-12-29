@@ -92,12 +92,10 @@ export default {
       this.popularList.forEach((item, i) => {
         count = i;
       })
-      console.log(count);
       return count;
     },
     popularProducts() {
       if (this.popProducts[this.currentTypeID]) {
-        console.log(this.popProducts[this.currentTypeID]);
         return this.popProducts[this.currentTypeID];
       }
 
@@ -168,6 +166,18 @@ export default {
   .slick-dots {
     width: 98%;
   }
+}
+
+.slick-dots li button:before {
+  content: "";
+  opacity: 1;
+  background: $neutral-primary;
+  border-radius: 50%;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  background: $primary-color;
 }
 
 .popular__list-item {

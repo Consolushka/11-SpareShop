@@ -24,7 +24,6 @@ export default {
   methods: {
     changeType(id, index) {
       this.selectedTab = index;
-      console.log("this");
       this.$emit('changed-type', id);
     }
   }

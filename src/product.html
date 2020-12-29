@@ -14,8 +14,12 @@
     <route></route>
     <product-page
       :products="database.products"
+      :user="database.user"
     ></product-page>
-    <category-advert></category-advert>
+    <category-advert :show="false"></category-advert>
+    <similar
+      :products="database.products"
+      :user="database.user"></similar>
     <footer>
       <footer-comp></footer-comp>
     </footer>

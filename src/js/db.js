@@ -91,7 +91,18 @@ export default {
       isSale: false,
       isWinter: false,
       isSummer: false,
-      sold: 1200
+      sold: 1200,
+      similar: [1134, 1135, 1136],
+      char: [
+        {
+          name: "Производитель",
+          value: "Кама"
+        },
+        {
+          name: "Тип",
+          value: "Поясной"
+        }],
+      rating: 2
     },
     1134: {
       id: 1134,
@@ -103,10 +114,25 @@ export default {
       isWinter: true,
       isSummer: false,
       sold: 1310,
-      mark: 'BMW',
-      model: '1-series',
-      carcase: 'E81 3d',
-      modification: '116 d'
+      char: [
+        {
+          name: "Производитель",
+          value: "BMW"
+        },
+        {
+          name: "Модель",
+          value: "1-series"
+        },
+        {
+          name: "Корпус",
+          value: "E81 3d"
+        },
+        {
+          name: "Модификация",
+          value: "116 D"
+        }
+      ],
+      rating: 4
     },
     1135: {
       id: 1135,
