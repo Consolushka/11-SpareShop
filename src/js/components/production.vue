@@ -1,30 +1,10 @@
 <template>
   <div class="production-wrapper">
     <hr class="js-production-hr" :style="returnMargin">
-    <ul class="production-list container container--left">
-      <li class="production-list-item">
-        <button class="btn btn--toggle">Каталог запчастей</button>
-      </li>
-      <li class="production-list-item">
-        <button class="btn btn--toggle">Каталог ТО</button>
-      </li>
-      <li class="production-list-item production-list-item--active">
-        <button class="btn btn--toggle">Шины</button>
-      </li>
-      <li class="production-list-item">
-        <button class="btn btn--toggle">Диски</button>
-      </li>
-      <li class="production-list-item">
-        <button class="btn btn--toggle">Аккумуляторы</button>
-      </li>
-      <li class="production-list-item">
-        <button class="btn btn--toggle">Автомасла</button>
-      </li>
-      <li class="production-list-item">
-        <button class="btn btn--toggle">Автолампы</button>
-      </li>
-      <li class="production-list-item">
-        <button class="btn btn--toggle">Аксессуары</button>
+    <ul class="production__list container container--left">
+      <li class="production__list-item" :class="{'production__list-item--active': type===currType}"
+          v-for="type in types" :key="type.id">
+        <a :href="'category.html?id='+type.id" class="btn btn--toggle">{{ type.title }}</a>
       </li>
     </ul>
     <hr class="js-production-hr" :style="returnMargin">
@@ -34,9 +14,31 @@
 <script>
 export default {
   name: "production",
+  props: {
+    types: Array,
+    products: Object
+  },
   computed: {
     returnMargin() {
       return "margin: 0 -" + Math.floor(((document.documentElement.clientWidth - 1170 - 18) / 2)).toString() + "px";
+    },
+    product() {
+      return this.products[Number(window.location.search.replace('?id=', ''))]
+    },
+    currType() {
+      let res;
+      if (this.products !== undefined) {
+        console.log('d');
+        this.types.forEach((typeItem) => {
+          if (typeItem.prods.includes(Number(window.location.search.replace('?id=', '')))) {
+            res = typeItem;
+          }
+        })
+      } else {
+        res = this.types[Number(window.location.search.replace('?id=', ''))];
+      }
+      console.log(res);
+      return res;
     }
   }
 }
@@ -54,7 +56,7 @@ export default {
   }
 }
 
-.production-list {
+.production__list {
   padding: 14px 0;
   display: flex;
   overflow-x: hidden;
@@ -64,19 +66,23 @@ export default {
   flex-wrap: nowrap;
 }
 
-.production-list-item {
+.production__list-item {
   font-size: 18px;
   margin-right: 15px;
   white-space: nowrap;
+
+  a {
+    color: $default-color;
+  }
 }
 
 @media (min-width: 1170px) {
-  .production-list {
+  .production__list {
     justify-content: space-between;
     overflow: visible;
   }
 
-  .production-list-item {
+  .production__list-item {
     margin: 0;
     font-size: 20px;
     position: relative;

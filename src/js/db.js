@@ -8,6 +8,7 @@ export default {
       iconWidth: 35,
       iconHeight: 38,
       iconPath: "/assets/img/sprite.svg#icon-chemicals",
+      url: '/chemical/',
       prods: [1133, 1134, 1135, 1137, 1136]
     },
     {
@@ -16,7 +17,8 @@ export default {
       href: '#',
       iconWidth: 39,
       iconHeight: 39,
-      iconPath: "/assets/img/sprite.svg#icon-tire"
+      iconPath: "/assets/img/sprite.svg#icon-tire",
+      prods: []
     },
     {
       id: 2,
@@ -24,7 +26,8 @@ export default {
       href: '#',
       iconWidth: 50,
       iconHeight: 50,
-      iconPath: "/assets/img/sprite.svg#icon-tools"
+      iconPath: "/assets/img/sprite.svg#icon-tools",
+      prods: []
     },
     {
       id: 3,
@@ -32,7 +35,8 @@ export default {
       href: '#',
       iconWidth: 28,
       iconHeight: 27,
-      iconPath: "/assets/img/sprite.svg#icon-to"
+      iconPath: "/assets/img/sprite.svg#icon-to",
+      prods: []
     },
     {
       id: 4,
@@ -40,7 +44,8 @@ export default {
       href: '#',
       iconWidth: 38,
       iconHeight: 38,
-      iconPath: "/assets/img/sprite.svg#icon-electric"
+      iconPath: "/assets/img/sprite.svg#icon-electric",
+      prods: []
     },
     {
       id: 5,
@@ -48,7 +53,8 @@ export default {
       href: '#',
       iconWidth: 18,
       iconHeight: 40,
-      iconPath: "/assets/img/sprite.svg#icon-accessories"
+      iconPath: "/assets/img/sprite.svg#icon-accessories",
+      prods: []
     }
   ],
   categories: [

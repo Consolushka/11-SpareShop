@@ -19,12 +19,16 @@ export default {
   .page {
     width: 870px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     align-items: flex-start;
 
     .card {
       width: 32%;
+
+      &:not(:last-child) {
+        margin-right: 11px;
+      }
     }
   }
 }

@@ -10,11 +10,11 @@
 <div class="wrapper">
   <div id="app">
     <navigation></navigation>
-    <header-component :cart="database.user.cart"></header-component>
-    <route></route>
+    <header-component :cart="database.user.cart" :types="database.types"></header-component>
+    <route :deep="2" :types="database.types"></route>
     <category-product
       :products="database.products"
-      :categories="database.types"
+      :types="database.types"
       :user="database.user"></category-product>
     <category-advert></category-advert>
     <footer>

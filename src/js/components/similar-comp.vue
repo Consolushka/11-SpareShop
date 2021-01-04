@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       settings: {
+        "arrows": false,
         "dots": true,
         "infinite": true,
         "speed": 500,

@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <production></production>
+    <production :types="types" :products="products"></production>
   </header>
 </template>
 
@@ -59,7 +59,9 @@ import {eventBus} from '../../index.js'
 
 export default {
   props: {
-    cart: Object
+    cart: Object,
+    types: Array,
+    products: Object
   },
   components: {
     Slide,
@@ -172,18 +174,15 @@ export default {
 
 @media (min-width: 1170px) {
   .header-wrapper {
-    justify-content: flex-start;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
   }
 
   .header-logo {
     width: 102px;
     height: 51px;
-    margin: 0 auto;
-  }
-
-  .header__user-options {
-    margin-left: auto;
   }
 }
 

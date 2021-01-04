@@ -1,5 +1,5 @@
 <template>
-  <div class="category-advert" v-if="show">
+  <div class="category-advert" v-if="isShow">
     <div class="container">
       <h3 class="title title--h3 category-advert-title">ШИНОМОНТАЖ</h3>
       <p class="category-advert-desc">Любой сложности и без очередей</p>
@@ -13,9 +13,14 @@ export default {
   props: {
     show: Boolean
   },
+  data() {
+    return {
+      isShow: this.show
+    }
+  },
   created() {
     if (document.documentElement.clientWidth < 1170 && this.show === false) {
-      this.show = true;
+      this.isShow = true;
     }
   }
 }

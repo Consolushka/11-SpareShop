@@ -23,10 +23,10 @@
         <div class="category__products-list-prod-wrapper">
           <category-page
             class="category__products-list-prod"
-            :products="ProductsOnPage"
+            :products="helpedProds"
             :user="user"></category-page>
           <button
-            v-if="ProdsOnPage<category.length || selectedPage<NumberOfPages"
+            v-if="ProdsOnPage<typeProds.length || selectedPage<NumberOfPages"
             class="btn btn--classic category__products-list-more"
             @click="ProdsOnPage+=3">Показать больше
           </button>
@@ -52,41 +52,40 @@ export default {
   name: "category-product",
   props: {
     products: Object,
-    categories: Array,
+    types: Array,
     user: Object
   },
   data() {
     return {
       pageHelper: 0,
-      currProducts: Object.values(this.products),
       selectedPage: 1,
       ProdsOnPage: 3,
-      category: this.categories[Number(window.location.search.replace('?id=', ''))].prods,
-      isPopularIncrease: true
+      typeProds: this.types[Number(window.location.search.replace('?id=', ''))].prods,
+      isPopularIncrease: true,
+      helpedProds: []
     }
   },
   computed: {
     clientWidth() {
       return document.documentElement.clientWidth;
     },
+    currProducts() {
+      let res = [];
+      Object.values(this.products).forEach((item) => {
+        if (this.typeProds.includes(item.id)) {
+          res.push(item);
+        }
+      });
+      return res;
+    },
     NumberOfPages() {
-      console.log(this.currProducts);
       let count;
-      if ((Math.floor(this.category.length / this.ProdsOnPage) + 1) * this.ProdsOnPage - this.ProdsOnPage >= this.category.length) {
-        count = Math.floor(this.category.length / this.ProdsOnPage);
+      if ((Math.floor(this.typeProds.length / this.ProdsOnPage) + 1) * this.ProdsOnPage - this.ProdsOnPage >= this.typeProds.length) {
+        count = Math.floor(this.typeProds.length / this.ProdsOnPage);
       } else {
-        count = Math.floor(this.category.length / this.ProdsOnPage) + 1;
+        count = Math.floor(this.typeProds.length / this.ProdsOnPage) + 1;
       }
       return count;
-    },
-    ProductsOnPage() {
-      let newArr = [];
-      for (let i = (this.selectedPage - 1) * 3; i < (this.selectedPage - 1) * this.ProdsOnPage + this.ProdsOnPage; i++) {
-        if (this.currProducts[i]) {
-          newArr.push(this.currProducts[i]);
-        }
-      }
-      return newArr;
     }
   },
   methods: {
@@ -94,18 +93,34 @@ export default {
       document.querySelector("body").classList.add("js-slide-left");
     },
     ToggleSort() {
-      if (this.isPopularIncrease === true) {
-        this.currProducts.sort((a, b) => a.sold < b.sold ? 1 : -1);
-      } else {
-        this.currProducts.sort((a, b) => a.sold > b.sold ? 1 : -1);
-      }
+      this.ProductsOnPage(this.sortArr(this.currProducts, this.isPopularIncrease));
       this.isPopularIncrease = !this.isPopularIncrease;
+    },
+    sortArr(arr, isInc) {
+      let newArr = arr.slice();
+      if (isInc) {
+        newArr.sort((a, b) => a.sold > b.sold ? 1 : -1);
+      } else {
+        newArr.sort((a, b) => a.sold < b.sold ? 1 : -1);
+      }
+      return newArr;
+    },
+    ProductsOnPage(arr) {
+      let newArr = [];
+      for (let i = (this.selectedPage - 1) * 3; i < (this.selectedPage - 1) * this.ProdsOnPage + this.ProdsOnPage; i++) {
+        if (arr[i]) {
+          newArr.push(arr[i]);
+        }
+      }
+      this.helpedProds = newArr;
     }
   },
   mounted() {
+    this.helpedProds = this.ProductsOnPage(this.currProducts);
+    console.log(this.ProductsOnPage(this.currProducts));
     eventBus.$on("renderProds", (newArr) => {
       console.log(newArr);
-      this.currProducts = newArr;
+      this.ProductsOnPage(newArr);
     })
   },
   created() {

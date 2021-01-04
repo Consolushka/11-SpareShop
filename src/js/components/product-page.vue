@@ -4,7 +4,7 @@
       <div class="product__main">
         <h2 class="product__main-title title title--h2">{{ product.title }}</h2>
         <p class="product__main-id">Код товара - {{ product.id }}</p>
-        <div class="product__main-features">
+        <div class="product__main-features" v-if="!smallScreen">
           <button class="btn btn--icon card__features-item card__features__favorite"
                   :class="{'card__features__favorite--active': isInFav}"
                   @click.prevent="addToFav(product.id); isInFav = !isInFav">
@@ -29,17 +29,19 @@
             </svg>
           </div>
         </div>
-        <types-panel :types="types" @changed-type="changeType"></types-panel>
-        <div class="product__main-char" v-if="currentTypeId===0">
-          <div class="product__main-char-item" v-for="char in product.char" :key="char.name">
-            <p class="product__main-char-item-name">{{ char.name }}</p>
-            <p class="product__main-char-item-value">{{ char.value }}</p>
+        <div v-if="!smallScreen">
+          <types-panel :types="types" @changed-type="changeType"></types-panel>
+          <div class="product__main-char" v-if="currentTypeId===0">
+            <div class="product__main-char-item" v-for="char in product.char" :key="char.name">
+              <p class="product__main-char-item-name">{{ char.name }}</p>
+              <p class="product__main-char-item-value">{{ char.value }}</p>
+            </div>
+          </div>
+          <div class="product__main-stock" v-if="currentTypeId===1">
+            <p>Наличие на складе</p>
           </div>
         </div>
-        <div class="product__main-stock" v-if="currentTypeId===1">
-          <p>Наличие на складе</p>
-        </div>
-        <button class="btn btn--primary product__main-buy" v-if="!smallScreen">Купить</button>
+        <button class="btn btn--primary product__main-buy" v-if="!smallScreen" @click="addToCart">Купить</button>
       </div>
       <div class="product__image">
         <svg class="product__image-season product__image-season--winter" v-show="product.isWinter" width="28"
@@ -52,7 +54,7 @@
         </svg>
         <img class="products__image-pic" :src="product.imgPath" :alt="product.title">
         <p class="product__image-price title title--h1">{{ product.price.toLocaleString('ru') }} &#8381</p>
-        <button class="btn btn--primary product__image-buy" v-if="smallScreen">Купить</button>
+        <button class="btn btn--primary product__image-buy" v-if="smallScreen" @click="addToCart">Купить</button>
       </div>
       <div class="product__info" v-if="smallScreen">
         <vsa-list>
@@ -71,6 +73,8 @@
 </template>
 
 <script>
+
+import {eventBus} from "../../index";
 
 export default {
   name: "product-page",
@@ -155,8 +159,16 @@ export default {
   },
   methods: {
     changeType(id) {
-      console.log(id);
       this.currentTypeId = id;
+    },
+    addToCart(id) {
+      if (Object.keys(this.user.cart).includes(id.toString())) {
+        this.user.cart[id].count++;
+        eventBus.$emit('changedCountOfCartItem');
+      } else {
+        this.user.cart[id] = {id: id, count: 1};
+        eventBus.$emit('addedProd', Object.keys(this.user.cart).length)
+      }
     },
     addToFav(id) {
       if (!this.user.favorites.includes(id)) {
@@ -251,7 +263,6 @@ export default {
   .product {
     position: relative;
     flex-direction: row;
-    justify-content: space-between;
 
     .panel__list-item-btn--active {
       color: $primary-color;
@@ -263,6 +274,7 @@ export default {
   }
 
   .product__main {
+    flex-grow: 1;
     order: 2;
   }
 
@@ -303,8 +315,8 @@ export default {
     text-align: left;
   }
 
-  .products__image-pic {
-
+  .product__image {
+    margin-right: 125px;
   }
 }
 </style>

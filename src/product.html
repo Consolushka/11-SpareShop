@@ -10,8 +10,13 @@
 <div class="wrapper">
   <div id="app">
     <navigation></navigation>
-    <header-component :cart="database.user.cart"></header-component>
-    <route></route>
+    <header-component :cart="database.user.cart" :types="database.types"
+                      :products="database.products"></header-component>
+    <route
+      :deep="3"
+      :products="database.products"
+      :types="database.types">
+    </route>
     <product-page
       :products="database.products"
       :user="database.user"
