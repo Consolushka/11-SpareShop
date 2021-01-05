@@ -65,12 +65,14 @@
                 <label class="filters__form-price-state-curr">
                   от
                   <input type="text" @change="SetPrice(false)"
-                         class="filters__form-price-state-input filters__form-price-state-input--start" value="0">
+                         class="filters__form-price-state-input filters__form-price-state-input--start" value="0"
+                         min="0">
                 </label>
                 <label class="filters__form-price-state-curr">
                   до
                   <input type="text" @change="SetPrice(false)"
-                         class="filters__form-price-state-input filters__form-price-state-input--end" value="25000">
+                         class="filters__form-price-state-input filters__form-price-state-input--end" value="25000"
+                         max="25000">
                 </label>
               </div>
             </div>
@@ -177,9 +179,13 @@ export default {
     MoveToggleStart(e) {
       let toggleStart = document.querySelector(".filters__form-price-toggle--start");
       let toggleEnd = document.querySelector(".filters__form-price-toggle--end");
-      let nextPos = e.x - CONTAINER_PADDING - toggleStart.clientWidth / 2;
-      if (Math.trunc(nextPos) * this.priceCoef >= 0) {
-        if (nextPos + 30 <= toggleEnd.getBoundingClientRect().x) {
+      let mousePos = e.x - toggleStart.clientWidth / 2;
+      let nextPos = mousePos - CONTAINER_PADDING;
+      if (this.clientWidth >= 1170) {
+        nextPos = mousePos - (this.clientWidth - 1170) / 2 + 9;
+      }
+      if (Math.trunc(nextPos + 1) >= 0) {
+        if (mousePos + 30 <= toggleEnd.getBoundingClientRect().x) {
           toggleStart.setAttribute("style", `left: ${Math.trunc(nextPos)}px`);
           this.SetPrice(true);
         }
@@ -191,11 +197,15 @@ export default {
     MoveToggleEnd(e) {
       let toggleStart = document.querySelector(".filters__form-price-toggle--start");
       let toggleEnd = document.querySelector(".filters__form-price-toggle--end");
-      let nextPos = e.x - toggleEnd.clientWidth / 2;
-      console.log(Math.trunc(nextPos) * this.priceCoef);
-      if (Math.trunc(nextPos) * this.priceCoef <= 25000) {
-        if (nextPos - 30 >= toggleStart.getBoundingClientRect().x) {
-          toggleEnd.setAttribute("style", `left: ${Math.trunc(nextPos - CONTAINER_PADDING)}px`);
+      let mousePos = e.x - toggleEnd.clientWidth / 2;
+      let nextPos = mousePos - CONTAINER_PADDING;
+      mousePos += 1;
+      if (this.clientWidth >= 1170) {
+        nextPos = mousePos - (this.clientWidth - 1170) / 2 + 9;
+      }
+      if (Math.trunc(mousePos + 1) * this.priceCoef <= 25000) {
+        if (mousePos - 30 >= toggleStart.getBoundingClientRect().x) {
+          toggleEnd.setAttribute("style", `left: ${Math.trunc(nextPos)}px`);
           this.SetPrice(true);
         }
       }
@@ -213,8 +223,9 @@ export default {
       this.formType = 'params';
       window.setTimeout(() => {
         if (this.priceCoef === 0) {
-          this.priceCoef = 25000 / document.querySelector(".filters__form-price-toggle--end").getBoundingClientRect().x;
+          this.priceCoef = 25000 / Math.trunc(document.querySelector(".filters__form-price-toggle--end").getBoundingClientRect().x);
         }
+        console.log(this.priceCoef);
         this.SetPrice(true);
       }, 100);
     },
@@ -225,14 +236,20 @@ export default {
       let inputStart = wrapper.querySelector(".filters__form-price-state-input--start");
       let inputEnd = wrapper.querySelector(".filters__form-price-state-input--end");
       if (isToggle) {
-        inputStart.value = Math.trunc((Math.trunc(toggleStart.getBoundingClientRect().x) - CONTAINER_PADDING) * this.priceCoef);
-        inputEnd.value = Math.trunc(toggleEnd.getBoundingClientRect().x * this.priceCoef);
+        inputStart.value = Math.trunc((Math.trunc(toggleStart.getBoundingClientRect().x) - CONTAINER_PADDING - 1) * this.priceCoef);
+        if (this.clientWidth >= 1170) {
+          inputStart.value = Math.trunc((Math.trunc(toggleStart.getBoundingClientRect().x - (this.clientWidth - 1170) / 2 + 9)) * this.priceCoef);
+        }
+        inputEnd.value = Math.trunc(Math.trunc(toggleEnd.getBoundingClientRect().x) * this.priceCoef);
       } else {
         toggleStart.setAttribute("style", `left: ${inputStart.value / this.priceCoef}px`);
         toggleEnd.setAttribute("style", `left: ${inputEnd.value / this.priceCoef - CONTAINER_PADDING}px`);
       }
       let rangeWidth = toggleEnd.getBoundingClientRect().x - toggleStart.getBoundingClientRect().x;
       let rangeLeft = toggleStart.getBoundingClientRect().x - CONTAINER_PADDING;
+      if (this.clientWidth >= 1170) {
+        rangeLeft -= (this.clientWidth - 1170) / 2 - CONTAINER_PADDING - 9;
+      }
       wrapper.querySelector(".filters__form-price-curr").setAttribute("style", `width: ${rangeWidth}px; left: ${rangeLeft}px`);
     },
     DrawRange() {
@@ -279,7 +296,7 @@ export default {
   height: 100vh;
   top: 0;
   width: 100%;
-  transform: translateX(96%);
+  transform: translateX(calc(100vw - 16px));
 }
 
 .filters-title {
@@ -473,11 +490,11 @@ export default {
   background: $primary-color;
 
   &--start {
-    left: 0;
+    left: -1px;
   }
 
   &--end {
-    right: 0;
+    right: 1px;
   }
 }
 
@@ -499,7 +516,7 @@ export default {
 
 
 .filters__form-price-state-curr input {
-  width: 43.5px;
+  width: 50px;
   border-bottom: 1px solid $neutral-light;
 }
 

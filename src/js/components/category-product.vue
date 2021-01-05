@@ -172,7 +172,7 @@ export default {
 }
 
 .js-slide-left {
-  transform: translateX(-100%);
+  transform: translateX(-100vw);
 }
 
 @media (min-width: 1170px) {
