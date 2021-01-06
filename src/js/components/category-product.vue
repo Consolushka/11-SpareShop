@@ -23,19 +23,20 @@
         <div class="category__products-list-prod-wrapper">
           <category-page
             class="category__products-list-prod"
-            :products="helpedProds"
+            :products="productsOnPage"
             :user="user"></category-page>
           <button
             v-if="ProdsOnPage<typeProds.length || selectedPage<NumberOfPages"
             class="btn btn--classic category__products-list-more"
-            @click="ProdsOnPage+=3">Показать больше
+            @click="ShowMoreProds">Показать больше
           </button>
           <div class="category__products-list-btns">
             <button
               v-for="i in NumberOfPages"
               class="btn btn--page"
               :class="{'btn--page--active': selectedPage===i}"
-              @click="selectedPage = i">{{ i }}
+              v-if="ProdsOnPage<typeProds.length"
+              @click="ChangePage(i)">{{ i }}
             </button>
           </div>
         </div>
@@ -62,21 +63,13 @@ export default {
       ProdsOnPage: 3,
       typeProds: this.types[Number(window.location.search.replace('?id=', ''))].prods,
       isPopularIncrease: true,
-      helpedProds: []
+      productsOnPage: [],
+      productsOfType: []
     }
   },
   computed: {
     clientWidth() {
       return document.documentElement.clientWidth;
-    },
-    currProducts() {
-      let res = [];
-      Object.values(this.products).forEach((item) => {
-        if (this.typeProds.includes(item.id)) {
-          res.push(item);
-        }
-      });
-      return res;
     },
     NumberOfPages() {
       let count;
@@ -93,7 +86,7 @@ export default {
       document.querySelector("body").classList.add("js-slide-left");
     },
     ToggleSort() {
-      this.ProductsOnPage(this.sortArr(this.currProducts, this.isPopularIncrease));
+      this.GetProductsOnPage(this.sortArr(this.productsOfType, this.isPopularIncrease));
       this.isPopularIncrease = !this.isPopularIncrease;
     },
     sortArr(arr, isInc) {
@@ -103,24 +96,41 @@ export default {
       } else {
         newArr.sort((a, b) => a.sold < b.sold ? 1 : -1);
       }
+      this.productsOfType = newArr;
       return newArr;
     },
-    ProductsOnPage(arr) {
+    ChangePage(i) {
+      this.selectedPage = i;
+      this.GetProductsOnPage(this.productsOfType);
+    },
+    GetProductsOnPage(arr) {
       let newArr = [];
       for (let i = (this.selectedPage - 1) * 3; i < (this.selectedPage - 1) * this.ProdsOnPage + this.ProdsOnPage; i++) {
         if (arr[i]) {
           newArr.push(arr[i]);
         }
       }
-      this.helpedProds = newArr;
+      this.productsOnPage = newArr;
+    },
+    ShowMoreProds() {
+      this.ProdsOnPage += 3;
+      this.GetProductsOnPage(this.productsOfType);
     }
   },
   mounted() {
-    this.helpedProds = this.ProductsOnPage(this.currProducts);
-    console.log(this.ProductsOnPage(this.currProducts));
+    let res = [];
+    Object.values(this.products).forEach((item) => {
+      if (this.typeProds.includes(item.id)) {
+        res.push(item);
+      }
+    });
+    this.productsOfType = res;
+    this.productsOnPage = this.GetProductsOnPage(this.productsOfType);
+    console.log(this.GetProductsOnPage(this.productsOfType));
     eventBus.$on("renderProds", (newArr) => {
       console.log(newArr);
-      this.ProductsOnPage(newArr);
+      this.productsOfType = newArr;
+      this.GetProductsOnPage(newArr);
     })
   },
   created() {

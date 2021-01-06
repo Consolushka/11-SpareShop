@@ -15,19 +15,21 @@
                 @click="formType='mark'">По марке
         </button>
       </div>
-      <form class="filters__form">
+      <form class="filters__form" id="js-filters">
         <div class="filters__form-season">
           <p class="filters__form-title filters__form-season-title">
             Сезонность
           </p>
           <div class="filters__form-season-wrapper">
-            <label class="filters__form-season-state" :class="{'filters__form-season-state--active':isSummer}"
-                   @click="isSummer = true; isWinter=false;">
+            <label class="filters__form-season-state"
+                   :class="{'filters__form-season-state--active':rules.season==='summer'}"
+                   @click="rules.season = 'summer'">
               <span>Летние</span>
               <input name="season" class="visually-hidden" value="summer" type="radio" @change="ChangeSeason">
             </label>
-            <label class="filters__form-season-state" :class="{'filters__form-season-state--active':isWinter}"
-                   @click="isSummer = false; isWinter=true;">
+            <label class="filters__form-season-state"
+                   :class="{'filters__form-season-state--active':rules.season==='winter'}"
+                   @click="rules.season='winter'">
               <input name="season" class="visually-hidden" value="winter" type="radio" @change="ChangeSeason">
 
               <span>Зимние</span>
@@ -64,13 +66,13 @@
               <div class="filters__form-price-state">
                 <label class="filters__form-price-state-curr">
                   от
-                  <input type="text" @change="SetPrice(false)"
+                  <input name="minPrice" type="text" @change="SetPrice(false)"
                          class="filters__form-price-state-input filters__form-price-state-input--start" value="0"
                          min="0">
                 </label>
                 <label class="filters__form-price-state-curr">
                   до
-                  <input type="text" @change="SetPrice(false)"
+                  <input name="maxPrice" type="text" @change="SetPrice(false)"
                          class="filters__form-price-state-input filters__form-price-state-input--end" value="25000"
                          max="25000">
                 </label>
@@ -139,6 +141,14 @@
         <button class="filters__form-show btn btn--primary" @click="renderProducts" type="button">Показать</button>
       </form>
     </div>
+    <div class="filters__error" v-show="isError">
+      <button class="btn btn--icon filters__error-close" @click="isError=false">
+        <svg width="24" height="24">
+          <use xlink:href="/assets/img/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
+      <p class="title title--h2">Минимальная цена не должна превышать максимальную</p>
+    </div>
   </div>
 </template>
 
@@ -159,7 +169,22 @@ export default {
       isSummer: false,
       priceCoef: 0,
       desktopMargin: this.clientWidth - 1170,
-      currProds: []
+      currProds: [],
+      isError: false,
+      rules: {
+        season: false,
+        mark: false,
+        modification: false,
+        carcase: false,
+        type: false,
+        price: {
+          min: 0,
+          max: 25000
+        },
+        diameter: false,
+        profile: false,
+        width: false
+      }
     }
   },
   mounted() {
@@ -242,6 +267,10 @@ export default {
         }
         inputEnd.value = Math.trunc(Math.trunc(toggleEnd.getBoundingClientRect().x) * this.priceCoef);
       } else {
+        if (Number(inputStart.value) > Number(inputEnd.value)) {
+          this.isError = true;
+          return 0;
+        }
         toggleStart.setAttribute("style", `left: ${inputStart.value / this.priceCoef}px`);
         toggleEnd.setAttribute("style", `left: ${inputEnd.value / this.priceCoef - CONTAINER_PADDING}px`);
       }
@@ -252,28 +281,16 @@ export default {
       }
       wrapper.querySelector(".filters__form-price-curr").setAttribute("style", `width: ${rangeWidth}px; left: ${rangeLeft}px`);
     },
-    DrawRange() {
-
-    },
     renderProducts() {
+      let formData = new FormData(document.querySelector("#js-filters"));
+      console.log(formData.get('diameter'));
       this.currProds = [];
-      Object.keys(this.products).forEach((prod) => {
-        if (this.isWinter === this.isSummer) {
-          this.currProds.push(this.products[prod]);
-        } else {
-          if (this.isWinter === true) {
-            if (this.products[prod].isWinter === true) {
-              this.currProds.push(this.products[prod]);
-            }
-          } else {
-            if (this.isSummer === true) {
-              if (this.products[prod].isSummer === true) {
-                this.currProds.push(this.products[prod]);
-              }
-            }
-          }
+      Object.keys(this.products).forEach((itemNumber) => {
+        let item = this.products[itemNumber];
+        if (item.price > Number(formData.get('minPrice')) && item.price < Number(formData.get('maxPrice'))) {
+          this.currProds.push(item);
         }
-      });
+      })
       console.log(this.currProds);
       eventBus.$emit("renderProds", this.currProds);
     },
@@ -297,6 +314,36 @@ export default {
   top: 0;
   width: 100%;
   transform: translateX(calc(100vw - 16px));
+}
+
+.filters__error {
+  position: absolute;
+  width: 80%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-top: 20px solid $primary-color;
+  height: 200px;
+  border-radius: 20px;
+  background: $neutral-primary;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filters__error-close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+
+  svg {
+    stroke: #ffffff;
+  }
+
+  &:hover {
+    stroke: darken(#ffffff, 10%);
+  }
 }
 
 .filters-title {
