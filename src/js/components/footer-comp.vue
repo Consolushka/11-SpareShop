@@ -1,50 +1,52 @@
 <template>
   <section class="footer">
-    <div class="container footer-form-wrapper">
-      <h3 class="footer-title">Подпишитесь на нашу рассылку
-        и узнавайте о акция быстрее</h3>
-      <form class="footer-form">
-        <input type="text" class="footer-form-input" placeholder="Введите ваш e-mail:">
-        <button class="btn footer-form-submit" type="submit">Отправить</button>
-      </form>
-    </div>
-    <vsa-list v-if="clientWidth<1170">
-      <vsa-item v-for="item in listOfItems" :key="item.id">
-        <vsa-heading>
-          {{ item.heading }}
-        </vsa-heading>
+    <div :class="{'footer-wrapper': clientWidth>1170}">
+      <div class="container footer-form-wrapper">
+        <h3 class="footer-title">Подпишитесь на нашу рассылку
+          и узнавайте о акция быстрее</h3>
+        <form class="footer-form">
+          <input type="text" class="footer-form-input" placeholder="Введите ваш e-mail:">
+          <button class="btn footer-form-submit" type="submit">Отправить</button>
+        </form>
+      </div>
+      <vsa-list v-if="clientWidth<1170">
+        <vsa-item v-for="item in listOfItems" :key="item.id">
+          <vsa-heading>
+            {{ item.heading }}
+          </vsa-heading>
 
-        <vsa-content>
-          {{ item.content }}
-        </vsa-content>
-      </vsa-item>
-    </vsa-list>
-    <div class="footer__info" v-else>
-      <div class="footer__info-tab">
-        <h4 class="footer__info-tab-title">Информация</h4>
-        <ul class="footer__info-tab-list">
-          <li class="footer__info-tab-list-item">О компании</li>
-          <li class="footer__info-tab-list-item">Контакты</li>
-          <li class="footer__info-tab-list-item">Реквизиты</li>
-          <li class="footer__info-tab-list-item">Магазины</li>
-        </ul>
-      </div>
-      <div class="footer__info-tab">
-        <h4 class="footer__info-tab-title">Сервисный центр</h4>
-        <ul class="footer__info-tab-list">
-          <li class="footer__info-tab-list-item">Доставка и самовывоз</li>
-          <li class="footer__info-tab-list-item">Оплата</li>
-          <li class="footer__info-tab-list-item">Возврат-обмен</li>
-          <li class="footer__info-tab-list-item">Новости</li>
-        </ul>
-      </div>
-      <div class="footer__info-tab">
-        <h4 class="footer__info-tab-title">Интернет магазин</h4>
-        <ul class="footer__info-tab-list">
-          <li class="footer__info-tab-list-item">Акции</li>
-          <li class="footer__info-tab-list-item">Договор оферты</li>
-          <li class="footer__info-tab-list-item">Политика обработки персональных данных</li>
-        </ul>
+          <vsa-content>
+            {{ item.content }}
+          </vsa-content>
+        </vsa-item>
+      </vsa-list>
+      <div class="footer__info" v-else>
+        <div class="footer__info-tab">
+          <h4 class="footer__info-tab-title">Информация</h4>
+          <ul class="footer__info-tab-list">
+            <li class="footer__info-tab-list-item">О компании</li>
+            <li class="footer__info-tab-list-item">Контакты</li>
+            <li class="footer__info-tab-list-item">Реквизиты</li>
+            <li class="footer__info-tab-list-item">Магазины</li>
+          </ul>
+        </div>
+        <div class="footer__info-tab">
+          <h4 class="footer__info-tab-title">Сервисный центр</h4>
+          <ul class="footer__info-tab-list">
+            <li class="footer__info-tab-list-item">Доставка и самовывоз</li>
+            <li class="footer__info-tab-list-item">Оплата</li>
+            <li class="footer__info-tab-list-item">Возврат-обмен</li>
+            <li class="footer__info-tab-list-item">Новости</li>
+          </ul>
+        </div>
+        <div class="footer__info-tab">
+          <h4 class="footer__info-tab-title">Интернет магазин</h4>
+          <ul class="footer__info-tab-list">
+            <li class="footer__info-tab-list-item">Акции</li>
+            <li class="footer__info-tab-list-item">Договор оферты</li>
+            <li class="footer__info-tab-list-item">Политика обработки персональных данных</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -86,6 +88,11 @@ export default {
 .footer {
   background: #F9F9FC;
   padding-top: 40px;
+}
+
+.footer-wrapper{
+  width: 1170px;
+  margin: 0 auto;
 }
 
 .footer-title {
