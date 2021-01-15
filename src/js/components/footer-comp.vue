@@ -71,6 +71,7 @@ export default {
           content: "Много Интернет-магазин"
         }
       ]
+
     }
   },
   computed: {
@@ -89,7 +90,7 @@ export default {
   padding-top: 40px;
 }
 
-.footer-wrapper {
+.footer-wrapper{
   width: 1170px;
   margin: 0 auto;
 }
@@ -100,6 +101,7 @@ export default {
   font-size: 17px;
   margin-bottom: 26px;
 }
+
 .footer-form {
   display: flex;
   flex-direction: row;
@@ -107,15 +109,18 @@ export default {
   align-items: flex-start;
   margin-bottom: 40px;
 }
+
 .footer-form-input {
   width: calc(100% - 109px);
   padding: 8px 12px;
+
   &::placeholder {
     font-weight: 400;
     font-size: 14px;
     color: #A5A5A5;
   }
 }
+
 .footer-form-submit {
   background: $primary-color;
   font-size: 11px;
@@ -124,33 +129,40 @@ export default {
   width: 109px;
   padding: 14px 16px;
 }
+
 .vsa-list {
   border: none;
   border-top: 1px solid #D6D6D6;
   border-bottom: 1px solid #D6D6D6;
 }
+
 @media (min-width: 1170px) {
   .footer {
     display: flex;
     justify-content: flex-start;
   }
+
   .footer-title {
     text-align: left;
   }
+
   .footer-form-wrapper {
     max-width: 294px;
     margin-right: 160px;
   }
+
   .footer__info {
     display: flex;
     width: 100%;
     font-size: 14px;
     justify-content: space-between;
   }
+
   .footer__info-tab-title {
     font-weight: 700;
     font-size: 14px;
   }
+
   .footer__info-tab {
     max-width: 156px;
   }
