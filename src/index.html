@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Магазин запчастей</title>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div id="app">
-        <navigation></navigation>
-        <header-component :cart="database.user.cart" :types="database.types"></header-component>
-        <main>
-          <div class="flex-wrapper">
-            <promo></promo>
-            <shares :sharedprod="database.shares" :products="database.products"></shares>
-          </div>
-          <categories :types="database.types" :categories="database.categories"></categories>
-          <popular :user="database.user" :types="database.types" :populars="database.popular"
-                   :products="database.products"></popular>
-          <advertising></advertising>
-        </main>
-        <footer>
-          <footer-comp></footer-comp>
-        </footer>
-      </div>
-      <!-- end #app wrapper -->
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>Магазин запчастей</title>
+</head>
+<body>
+<div class="wrapper">
+  <div id="app">
+    <div class="desktop-wrapper">
+      <navigation></navigation>
+      <header-component :cart="database.user.cart" :types="database.types"></header-component>
+      <main>
+        <div class="flex-wrapper">
+          <promo></promo>
+          <shares :sharedprod="database.shares" :products="database.products"></shares>
+        </div>
+        <categories :types="database.types" :categories="database.categories"></categories>
+        <popular :user="database.user" :types="database.types" :populars="database.popular"
+                 :products="database.products"></popular>
+        <advertising></advertising>
+      </main>
     </div>
-    <!-- end main wrapper -->
-  </body>
+    <footer>
+      <footer-comp></footer-comp>
+    </footer>
+  </div>
+  <!-- end #app wrapper -->
+</div>
+<!-- end main wrapper -->
+</body>
 </html>

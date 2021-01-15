@@ -1,5 +1,5 @@
 <template>
-  <a href="#" class="share shares-item">
+  <a :href="'product.html?id='+product.id" class="share shares-item">
     <div class="share__window">
       <div class="share__window-price">
         <p class="share__window-price-new">{{ product.newPrice }} &#8381</p>
@@ -15,9 +15,7 @@
           <use xlink:href="/assets/img/sprite.svg#icon-timer"></use>
         </svg>
         <div class="share__timer-remaining-time">
-          <p>{{
-              this.hoursRemaining(product.endOfSale)
-            }}:{{ minutesRemaining(product.endOfSale) }}:{{ secRemaining(product.endOfSale) }}</p>
+          <time-dynamic :endTime="product.endOfSale"></time-dynamic>
         </div>
         <p class="share__timer-remaining-time"></p>
       </div>
@@ -30,25 +28,6 @@ export default {
   name: "card-share",
   props: {
     product: Object
-  },
-  methods: {
-    hoursRemaining(end) {
-      let now = new Date().valueOf();
-      let ended = end.valueOf();
-      return Math.floor((ended - now) / 1000 / 3600).toString();
-    },
-    minutesRemaining(end) {
-      let now = new Date().valueOf();
-      let ended = end.valueOf();
-      let hours = this.hoursRemaining(end) * 1000 * 3600;
-      return Math.floor((ended - now - hours) / 1000 / 60).toString();
-    },
-    secRemaining(end) {
-      let now = new Date().valueOf();
-      let ended = end.valueOf();
-      let minutes = this.minutesRemaining(end) * 1000 * 60;
-      return Math.floor((ended - now - minutes) / 1000 / 3600 / 24).toString();
-    }
   }
 }
 </script>

@@ -160,7 +160,8 @@ const CONTAINER_PADDING = 14;
 export default {
   name: "filters",
   props: {
-    products: Object
+    products: Object,
+    typeProds: Array
   },
   data() {
     return {
@@ -285,7 +286,8 @@ export default {
       let formData = new FormData(document.querySelector("#js-filters"));
       console.log(formData.get('diameter'));
       this.currProds = [];
-      Object.keys(this.products).forEach((itemNumber) => {
+      console.log(this.products);
+      this.typeProds.forEach((itemNumber) => {
         let item = this.products[itemNumber];
         if (item.price > Number(formData.get('minPrice')) && item.price < Number(formData.get('maxPrice'))) {
           this.currProds.push(item);

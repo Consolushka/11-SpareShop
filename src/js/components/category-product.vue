@@ -1,7 +1,7 @@
 <template>
   <section class="category">
     <div class="container">
-      <h2 class="category-title title title--h2">Шины</h2>
+      <h2 class="category-title title title--h2">{{ typeTitle }}</h2>
       <div class="category__render">
         <div class="category__render-wrapper">
           <button class="btn btn--icon category__render-sort" @click="ToggleSort">
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="category__products-list">
-        <filters :products="products"></filters>
+        <filters :products="products" :typeProds="typeProds"></filters>
         <div class="category__products-list-prod-wrapper">
           <category-page
             class="category__products-list-prod"
@@ -62,6 +62,7 @@ export default {
       selectedPage: 1,
       ProdsOnPage: 3,
       typeProds: this.types[Number(window.location.search.replace('?id=', ''))].prods,
+      typeTitle: this.types[Number(window.location.search.replace('?id=', ''))].title,
       isPopularIncrease: true,
       productsOnPage: [],
       productsOfType: []

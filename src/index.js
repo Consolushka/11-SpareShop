@@ -31,6 +31,7 @@ Vue.component("category-page", require("./js/components/category-page.vue").defa
 Vue.component("category-advert", require("./js/components/category-advert.vue").default)
 Vue.component("filters", require("./js/components/filters.vue").default)
 Vue.component("product-page", require("./js/components/product-page.vue").default)
+Vue.component("time-dynamic", require("./js/components/time-dynamic.vue").default)
 
 import VueSimpleAccordion from 'vue-simple-accordion';
 import 'vue-simple-accordion/dist/vue-simple-accordion.css';
