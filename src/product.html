@@ -9,22 +9,24 @@
 <body>
 <div class="wrapper">
   <div id="app">
-    <navigation></navigation>
-    <header-component :cart="database.user.cart" :types="database.types"
-                      :products="database.products"></header-component>
-    <route
-      :deep="3"
-      :products="database.products"
-      :types="database.types">
-    </route>
-    <product-page
-      :products="database.products"
-      :user="database.user"
-    ></product-page>
-    <category-advert :show="false"></category-advert>
-    <similar
-      :products="database.products"
-      :user="database.user"></similar>
+    <div class="desktop-wrapper">
+      <navigation></navigation>
+      <header-component :cart="database.user.cart" :types="database.types"
+                        :products="database.products"></header-component>
+      <route
+        :deep="3"
+        :products="database.products"
+        :types="database.types">
+      </route>
+      <product-page
+        :products="database.products"
+        :user="database.user"
+      ></product-page>
+      <category-advert :show="false"></category-advert>
+      <similar
+        :products="database.products"
+        :user="database.user"></similar>
+    </div>
     <footer>
       <footer-comp></footer-comp>
     </footer>

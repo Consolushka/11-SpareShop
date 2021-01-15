@@ -18,6 +18,7 @@
             <svg width="20" height="27">
               <use xlink:href="/assets/img/sprite.svg#icon-compare"></use>
             </svg>
+            <comparison :products="products"></comparison>
           </button>
           <div class="product__main-features-rating">
             <svg
@@ -236,6 +237,10 @@ export default {
 
 .product__image-buy {
   width: 100%;
+}
+
+.card__features__compare {
+  position: relative;
 }
 
 .vsa-list {
