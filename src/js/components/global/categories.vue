@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {eventBus} from "../../index";
+import {eventBus} from "../../../index";
 
 export default {
   name: "product-type",
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/utils/vars.scss";
+@import "../../../assets/scss/utils/vars";
 
 .types {
   margin-bottom: 80px;

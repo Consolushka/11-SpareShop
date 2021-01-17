@@ -13,12 +13,12 @@
             </svg>
           </button>
           <button class="btn btn--icon card__features-item card__features__compare"
-                  :class="{'card__features__compare--active': isInFav}"
-                  @click.prevent="startCompare">
-            <svg width="20" height="27">
+                  :class="{'card__features__compare--active': isInFav}">
+            <svg width="20" height="27"
+                 @click.prevent="isComparing=!isComparing">
               <use xlink:href="/assets/img/sprite.svg#icon-compare"></use>
             </svg>
-            <comparison :products="products"></comparison>
+            <comparison :products="products" v-show="isComparing"></comparison>
           </button>
           <div class="product__main-features-rating">
             <svg
@@ -75,7 +75,7 @@
 
 <script>
 
-import {eventBus} from "../../index";
+import {eventBus} from "../../../index";
 
 export default {
   name: "product-page",
@@ -134,7 +134,8 @@ export default {
         }
       ],
       currentTypeId: 0,
-      isInFav: false
+      isInFav: false,
+      isComparing: false
     }
   },
   mounted() {
@@ -185,7 +186,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/utils/vars.scss";
+@import "../../../assets/scss/utils/vars";
 
 .hidden {
   display: none;

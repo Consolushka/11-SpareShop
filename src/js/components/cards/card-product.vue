@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {eventBus} from '../../index.js'
+import {eventBus} from '../../../index.js'
 
 export default {
   name: "product-card",
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'src/assets/scss/utils/vars.scss';
+@import '../../../assets/scss/utils/vars';
 
 .card {
   color: $default-color;

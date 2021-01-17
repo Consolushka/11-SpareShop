@@ -10,7 +10,7 @@
 <div class="wrapper">
   <div id="app">
     <div class="desktop-wrapper">
-      <navigation></navigation>
+      <aside-navigation></aside-navigation>
       <header-component :cart="database.user.cart" :types="database.types"
                         :products="database.products"></header-component>
       <route
@@ -23,9 +23,9 @@
         :user="database.user"
       ></product-page>
       <category-advert :show="false"></category-advert>
-      <similar
+      <product-similar
         :products="database.products"
-        :user="database.user"></similar>
+        :user="database.user"></product-similar>
     </div>
     <footer>
       <footer-comp></footer-comp>

@@ -153,7 +153,7 @@
 </template>
 
 <script>
-import {eventBus} from "../../index";
+import {eventBus} from "../../../index";
 
 const CONTAINER_PADDING = 14;
 
@@ -304,7 +304,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/utils/vars.scss";
+@import "../../../assets/scss/utils/vars";
 
 .filters {
   font-size: 15px;

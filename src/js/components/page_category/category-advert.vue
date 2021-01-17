@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/utils/vars.scss";
+@import "../../../assets/scss/utils/vars";
 
 .category-advert {
   padding-top: 61px;

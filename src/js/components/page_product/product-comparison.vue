@@ -2,7 +2,7 @@
   <article class="comparison">
     <div class="comparison__select" v-show="!isComparisonProdSelected">
       <div class="comparison__select-item" v-for="product in products" :key="product.id"
-           @click="isComparisonProdSelected=true; selectedProd=product">
+           @click="isComparisonProdSelected=true; selectedProd=product; ArrangeLocation()">
         <img :src="product.imgPath" :alt="product.title" width="60" height="100">
         <p class="comparison__select-item-title">{{ product.title }}</p>
       </div>
@@ -44,17 +44,24 @@ export default {
       isComparisonProdSelected: false,
       selectedProd: {}
     }
+  },
+  mounted() {
+    document.querySelectorAll(".comparison__select-item").forEach((item, index) => {
+      if (index + 3 >= Object.keys(this.products).length) {
+        item.setAttribute("style", "margin-bottom: 0");
+      }
+    });
   }
 }
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/utils/vars.scss";
+@import "../../../assets/scss/utils/vars";
 
 .comparison {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 25px;
+  top: 25px;
   width: 40vw;
   background: #ffffff;
   border-radius: 4px;

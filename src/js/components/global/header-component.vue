@@ -55,7 +55,7 @@
 
 <script>
 import {Slide, Push} from 'vue-burger-menu'
-import {eventBus} from '../../index.js'
+import {eventBus} from '../../../index.js'
 
 export default {
   props: {
@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/utils/vars.scss";
+@import "../../../assets/scss/utils/vars";
 
 .js-slide-right {
   transform: translateX(242px);

@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="category__products-list">
-        <filters :products="products" :typeProds="typeProds"></filters>
+        <category-filters :products="products" :typeProds="typeProds"></category-filters>
         <div class="category__products-list-prod-wrapper">
           <category-page
             class="category__products-list-prod"
@@ -47,7 +47,7 @@
 
 <script>
 
-import {eventBus} from "../../index";
+import {eventBus} from "../../../index";
 
 export default {
   name: "category-product",

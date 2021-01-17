@@ -9,14 +9,16 @@
 <body>
 <div class="wrapper">
   <div id="app">
-    <navigation></navigation>
-    <header-component :cart="database.user.cart" :types="database.types"></header-component>
-    <route :deep="2" :types="database.types"></route>
-    <category-product
-      :products="database.products"
-      :types="database.types"
-      :user="database.user"></category-product>
-    <category-advert></category-advert>
+    <div class="desktop-wrapper">
+      <aside-navigation></aside-navigation>
+      <header-component :cart="database.user.cart" :types="database.types"></header-component>
+      <route :deep="2" :types="database.types"></route>
+      <category
+        :products="database.products"
+        :types="database.types"
+        :user="database.user"></category>
+      <category-advert></category-advert>
+    </div>
     <footer>
       <footer-comp></footer-comp>
     </footer>

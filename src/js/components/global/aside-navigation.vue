@@ -97,7 +97,7 @@
 <script>
 // Жду на курсе по вью: https://tocode.ru/curses/vuejs-s-nylya-do-pro
 // Скидка по промокоду: "WEBPACK" ;)
-import {eventBus} from "../../index";
+import {eventBus} from "../../../index";
 
 export default {
   data() {
@@ -109,7 +109,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/utils/vars.scss";
+@import "../../../assets/scss/utils/vars";
 
 .navigation {
   width: 242px;
